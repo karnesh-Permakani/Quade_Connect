@@ -1,0 +1,3048 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyber">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuadeConnect — Neon Cyan Architectural Millwork ERP</title>
+<style>
+:root {
+  --navy: #0f172a;
+  --navy-light: #1e293b;
+  --blue: #1d6fb8;
+  --blue2: #2563eb;
+  --blue-hover: #1d4ed8;
+  --link: #2563eb;
+  --orange: #f97316;
+  --orange-dark: #ea580c;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --green: #16a34a;
+  --green-bg: #dcfce7;
+  --red: #dc2626;
+  --red-bg: #fee2e2;
+  --amber: #d97706;
+  --amber-bg: #fef3c7;
+  --purple: #7c3aed;
+  --purple-bg: #f3e8ff;
+  --pill: #e0f2fe;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); text-decoration: none; cursor: pointer; transition: color 0.15s ease; }
+a:hover { color: var(--blue-hover); text-decoration: underline; }
+button { font-family: inherit; }
+
+/* ---------- Sticky Glassmorphic Top Bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 22px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: var(--shadow-xs);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  user-select: none;
+}
+.brand .logo {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: #fff;
+  font-weight: 900;
+  border-radius: var(--radius-md);
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 4px rgba(249, 115, 22, 0.3);
+}
+.brand .module {
+  font-size: 11px;
+  font-weight: 600;
+  background: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 6px;
+}
+
+.topnav a { font-weight: 600; margin-right: 14px; font-size: 13px; color: var(--text); }
+.topnav a:hover { color: var(--blue2); text-decoration: none; }
+
+.top-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.global-search {
+  width: 280px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  background: #f8fafc;
+  transition: all 0.15s ease;
+}
+.global-search:focus {
+  background: #fff;
+  border-color: var(--blue2);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.role-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+.role-label select {
+  padding: 4px 6px;
+  border: none;
+  background: transparent;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 12px;
+}
+.role-label select:focus { outline: none; }
+
+/* ---------- Main Body ---------- */
+main {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 16px 22px 50px;
+}
+
+.crumb {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.crumb .chev { color: var(--orange); font-weight: 800; font-size: 14px; }
+.crumb a { font-weight: 600; color: var(--text-muted); }
+.crumb a:hover { color: var(--blue2); }
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4px 0 12px;
+}
+.page-head h1 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.view-switch {
+  display: flex;
+  background: #e2e8f0;
+  padding: 3px;
+  border-radius: var(--radius-md);
+  gap: 2px;
+}
+.view-switch button {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  color: #475569;
+  transition: all 0.15s ease;
+}
+.view-switch button:hover { color: var(--navy); }
+.view-switch button.active {
+  background: #ffffff;
+  color: var(--navy);
+  box-shadow: var(--shadow-xs);
+}
+
+.role-banner {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  padding: 9px 14px;
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.role-banner.restricted {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #9a3412;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  background: #334155;
+  color: #fff;
+  border: none;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.btn:hover { filter: brightness(1.1); transform: translateY(-0.5px); }
+.btn:active { transform: translateY(0); }
+.btn.primary { background: var(--blue2); }
+.btn.orange { background: linear-gradient(135deg, var(--orange), var(--orange-dark)); }
+.btn.green { background: var(--green); }
+.btn.red { background: var(--red); }
+.btn.ghost { background: #fff; color: #334155; border: 1px solid var(--border); box-shadow: var(--shadow-xs); }
+.btn.ghost:hover { background: #f8fafc; border-color: #cbd5e1; }
+.btn.small { padding: 4px 9px; font-size: 11px; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 12px; align-items: center; }
+
+/* ---------- Panels & High-Density Table ---------- */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: var(--shadow-xs);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.toolbar .spacer { flex: 1; }
+.toolbar select, .toolbar input {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  background: #fff;
+}
+.toolbar select:focus, .toolbar input:focus {
+  outline: none;
+  border-color: var(--blue2);
+}
+.hint { font-size: 11.5px; color: var(--text-muted); }
+
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  box-shadow: var(--shadow-xs);
+}
+
+table.grid {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+table.grid th {
+  background: #f8fafc;
+  text-align: left;
+  font-weight: 700;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #475569;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid #f1f5f9;
+  cursor: pointer;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+table.grid th:hover { background: #f1f5f9; }
+table.grid th.num, table.grid td.num { text-align: right; }
+
+table.grid tr.filters td {
+  padding: 4px 6px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+table.grid tr.filters input {
+  width: 100%;
+  min-width: 60px;
+  padding: 4px 6px;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  font-size: 11.5px;
+}
+table.grid tr.filters input:focus {
+  outline: none;
+  border-color: var(--blue2);
+}
+
+table.grid td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  border-right: 1px solid #f8fafc;
+  font-size: 12.5px;
+}
+table.grid tbody tr:hover td {
+  background: #f8fbff;
+}
+
+table.grid tfoot td {
+  font-weight: 800;
+  background: #f8fafc;
+  border-top: 2px solid var(--border);
+  padding: 10px;
+  color: var(--navy);
+}
+table.grid tr.group td {
+  background: #eef2f7;
+  font-weight: 800;
+  color: #334155;
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.pager a {
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+}
+.pager a.active {
+  font-weight: 800;
+  background: var(--navy);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ---------- Badges & Micro-Pills ---------- */
+.badge {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #e2e8f0;
+  color: #334155;
+}
+.b-green { background: var(--green-bg); color: #15803d; }
+.b-red { background: var(--red-bg); color: #b91c1c; }
+.b-amber { background: var(--amber-bg); color: #b45309; }
+.b-blue { background: #dbeafe; color: #1e40af; }
+.b-purple { background: var(--purple-bg); color: #6b21a8; }
+.b-gray { background: #f1f5f9; color: #475569; }
+
+.sigma {
+  display: inline-block;
+  background: #e2e8f0;
+  color: #0f172a;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-weight: 800;
+  font-family: Consolas, monospace;
+  margin-right: 4px;
+}
+.revs {
+  display: inline-block;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.prio { font-weight: 700; font-size: 11px; }
+.prio.Critical { color: var(--red); }
+.prio.High { color: var(--amber); }
+.prio.Normal { color: var(--blue2); }
+.prio.Low { color: var(--text-muted); }
+
+.bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 65px;
+}
+.bar > span {
+  display: block;
+  height: 100%;
+  background: var(--blue2);
+  border-radius: 3px;
+}
+.bar > span.over { background: var(--red); }
+
+/* ---------- Modern Kanban Board ---------- */
+.kanban {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  align-items: flex-start;
+}
+.kcol {
+  min-width: 250px;
+  width: 250px;
+  background: #f1f5f9;
+  border-radius: var(--radius-md);
+  padding: 10px;
+  min-height: 380px;
+  border: 1px solid var(--border);
+}
+.kcol.over {
+  outline: 2px dashed var(--blue2);
+  background: #e0f2fe;
+}
+.khead {
+  font-weight: 800;
+  font-size: 12px;
+  padding: 6px 4px 10px;
+  border-top: 4px solid #64748b;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--navy);
+}
+.khead .count {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1px 7px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #475569;
+  box-shadow: var(--shadow-xs);
+}
+
+.kcard {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  margin-bottom: 9px;
+  box-shadow: var(--shadow-xs);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.kcard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #cbd5e1;
+}
+.kcard[draggable=true] { cursor: grab; }
+.kcard[draggable=true]:active { cursor: grabbing; }
+
+.kcard .kno {
+  font-size: 11px;
+  color: var(--blue2);
+  font-weight: 800;
+  font-family: Consolas, monospace;
+}
+.kcard .kname {
+  font-weight: 700;
+  font-size: 13px;
+  margin: 3px 0 2px;
+  color: var(--navy);
+}
+.kcard .kcust {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+.kcard .kmeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+.kcard .kfoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 7px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ---------- Gantt Chart ---------- */
+.gantt {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  box-shadow: var(--shadow-xs);
+}
+.grow {
+  display: flex;
+  border-bottom: 1px solid #f1f5f9;
+  min-height: 32px;
+  align-items: center;
+}
+.glabel {
+  width: 290px;
+  min-width: 290px;
+  padding: 6px 12px;
+  border-right: 1px solid var(--border);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gtrack {
+  position: relative;
+  flex: 1;
+  min-width: 820px;
+  height: 32px;
+}
+.gmonths {
+  display: flex;
+  flex: 1;
+  min-width: 820px;
+  background: #f8fafc;
+}
+.gmonths div {
+  flex: 1;
+  border-left: 1px solid #f1f5f9;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 7px 6px;
+  color: var(--text-muted);
+}
+.gbar {
+  position: absolute;
+  top: 7px;
+  height: 18px;
+  border-radius: 9px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0 8px;
+  line-height: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+.gtoday {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--orange);
+  z-index: 5;
+}
+
+/* ---------- Inside Project Command Center ---------- */
+.proj-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.proj-head h1 {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 2px 0 8px;
+  letter-spacing: -0.5px;
+}
+.pills { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill {
+  background: var(--pill);
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: Consolas, monospace;
+}
+.budget-ok {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  margin: 14px 0 14px;
+  flex-wrap: wrap;
+}
+.tabs a {
+  padding: 9px 14px;
+  color: #475569;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  transition: all 0.15s ease;
+}
+.tabs a:hover {
+  color: var(--navy);
+  text-decoration: none;
+  background: #f1f5f9;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+.tabs a.active {
+  color: var(--orange-dark);
+  border-bottom-color: var(--orange);
+  font-weight: 800;
+}
+.tabs .cnt {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 10px;
+  padding: 0 6px;
+  font-size: 10.5px;
+  margin-right: 5px;
+  font-weight: 800;
+}
+
+/* ---------- Details Cards ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 14px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-xs);
+}
+.card h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--navy);
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 8px;
+}
+.kv {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  row-gap: 8px;
+  font-size: 12.5px;
+}
+.kv div:nth-child(odd) { color: var(--text-muted); font-weight: 500; }
+
+.lock {
+  font-size: 12px;
+  color: #9a3412;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+}
+
+table.mini {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+table.mini th, table.mini td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: left;
+}
+table.mini th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+}
+table.mini input {
+  width: 75px;
+  padding: 3px 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Split-Pane Document Studio (Sheets & Shop Drawings) ---------- */
+.docview {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 16px;
+}
+.docmeta label {
+  display: block;
+  font-size: 11.5px;
+  color: #475569;
+  margin: 10px 0 3px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.docmeta input, .docmeta select {
+  width: 100%;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+}
+.docmeta input:focus, .docmeta select:focus {
+  outline: none;
+  border-color: var(--blue2);
+}
+
+.revlist {
+  margin-top: 18px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.revlist h4 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #475569;
+}
+.rev {
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  margin-bottom: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  background: #fff;
+  transition: all 0.15s ease;
+}
+.rev:hover { background: #f8fafc; border-color: #cbd5e1; }
+.rev.viewing {
+  border-color: var(--orange);
+  background: #fff7ed;
+  box-shadow: 0 0 0 1px var(--orange);
+}
+.rev .rname { font-weight: 800; color: var(--navy); }
+.rev .rsub { color: var(--text-muted); font-size: 10.5px; margin-top: 2px; }
+
+.viewer {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xs);
+}
+.vtop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.vtop .spacer { flex: 1; }
+
+.vmain { display: flex; align-items: center; gap: 10px; }
+.vnav {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--navy);
+  box-shadow: var(--shadow-xs);
+  transition: all 0.15s ease;
+  display: grid;
+  place-items: center;
+}
+.vnav:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: scale(1.05);
+}
+.vnav:disabled { opacity: 0.25; cursor: not-allowed; }
+
+.vstage {
+  flex: 1;
+  height: 520px;
+  overflow: auto;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.vstage svg {
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+}
+
+.vcompare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+}
+.vcompare .vstage { height: 480px; }
+.vcompare .cap { font-weight: 800; font-size: 12px; margin-bottom: 6px; }
+
+.thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-top: 12px;
+  padding-bottom: 4px;
+}
+.thumbs .th {
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+.thumbs .th:hover { border-color: #cbd5e1; }
+.thumbs .th.active {
+  border-color: var(--orange);
+  background: #fff7ed;
+  color: var(--orange-dark);
+  font-weight: 700;
+}
+.thumbs .th .pg {
+  height: 70px;
+  width: 95px;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 3px;
+  font-weight: 800;
+  font-family: Consolas, monospace;
+}
+
+/* ---------- Files Explorer ---------- */
+.files {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 16px;
+}
+.folders a {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  color: #334155;
+  font-weight: 500;
+  margin-bottom: 2px;
+  transition: all 0.15s ease;
+}
+.folders a:hover { background: #f1f5f9; text-decoration: none; }
+.folders a.active {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-weight: 800;
+}
+.key {
+  font-family: Consolas, monospace;
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* ---------- Modal Dialogs with Backdrop Blur ---------- */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  z-index: 60;
+  animation: fadeIn 0.15s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  width: min(720px, 94vw);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid #cbd5e1;
+  overflow: hidden;
+}
+.modal.wide { width: min(1080px, 96vw); }
+
+.mhead {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--navy);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+}
+.mhead button {
+  border: none;
+  background: none;
+  font-size: 22px;
+  color: #64748b;
+  cursor: pointer;
+  line-height: 1;
+}
+.mhead button:hover { color: var(--navy); }
+
+.mbody { padding: 18px 20px; overflow: auto; }
+.mfoot {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background: #f8fafc;
+}
+
+.form label {
+  display: block;
+  font-weight: 700;
+  font-size: 12px;
+  color: #334155;
+  margin: 12px 0 4px;
+}
+.form input, .form select, .form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 12.5px;
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+  outline: none;
+  border-color: var(--blue2);
+}
+.form .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 6px 0;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.check input { margin-top: 2px; }
+
+#toast { position: fixed; bottom: 24px; right: 24px; z-index: 80; }
+#toast div {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  margin-top: 8px;
+  box-shadow: var(--shadow-lg);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.denied {
+  background: #fff;
+  border: 1px solid #fecaca;
+  padding: 36px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  color: #991b1b;
+}
+
+.activity div {
+  padding: 9px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+.activity .t { color: var(--text-muted); font-size: 11px; margin-bottom: 2px; }
+
+
+/* ==========================================================================
+   QUADECONNECT PM — ULTRA NEON CYAN CYBERPUNK MASTER THEME
+   Dominant Palette: Laser Cyan (#00f5ff), Electric Cyan (#00e5ff),
+   OLED Void Black (#030508), Dark Glass Obsidian (#070d18 / #0c1526)
+   ========================================================================== */
+
+:root, [data-theme="cyber"], [data-theme="neoncyan"], [data-theme="dark"] {
+  --navy: #ffffff;
+  --navy-light: #a5f3fc;
+  --blue: #00f5ff;
+  --blue2: #00f5ff;
+  --blue-hover: #38bdf8;
+  --link: #00f5ff;
+  --orange: #00f5ff;
+  --orange-dark: #0284c7;
+  --border: #132742;
+  --border-light: #091322;
+  --bg: #030508;
+  --surface: #070d18;
+  --surface-alt: #0b1424;
+  --surface-hover: #101e36;
+  --text: #f0fdf4;
+  --text-muted: #7dd3fc;
+  --table-th-bg: #040812;
+  --table-th-text: #00f5ff;
+  --table-row-hover: #0c1b33;
+  --kanban-col-bg: #050a14;
+  --green: #00ff9d;
+  --green-bg: rgba(0, 255, 157, 0.16);
+  --red: #ff0055;
+  --red-bg: rgba(255, 0, 85, 0.16);
+  --amber: #00f5ff;
+  --amber-bg: rgba(0, 245, 255, 0.16);
+  --purple: #d946ef;
+  --purple-bg: rgba(217, 70, 239, 0.16);
+  --pill: #082f49;
+  --pill-text: #00f5ff;
+  --pill-border: #00f5ff;
+  --accent-glow: 0 0 18px rgba(0, 245, 255, 0.5);
+  --card-border-glow: 1px solid rgba(0, 245, 255, 0.35);
+  --card-glow-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 245, 255, 0.12);
+}
+
+/* Base Body Application Overrides */
+body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: 0.15px;
+}
+
+/* Top Navigation Bar with Neon Cyan Glassmorphism */
+.topbar {
+  background: rgba(7, 13, 24, 0.95) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.7), 0 1px 0 rgba(0, 245, 255, 0.25);
+  backdrop-filter: blur(16px);
+}
+.brand .logo {
+  background: linear-gradient(135deg, #00f5ff, #0284c7) !important;
+  color: #030508 !important;
+  font-weight: 900 !important;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.6) !important;
+}
+.brand b {
+  color: #00f5ff !important;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+}
+.brand .module {
+  background: rgba(0, 245, 255, 0.12) !important;
+  color: #00f5ff !important;
+  border: 1px solid rgba(0, 245, 255, 0.4) !important;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+}
+.topnav a {
+  color: var(--text) !important;
+  transition: all 0.2s ease;
+}
+.topnav a:hover {
+  color: #00f5ff !important;
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.6);
+}
+
+/* Quick Jump Millwork Subbar */
+.inn-subbar {
+  background: #060a13 !important;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.2) !important;
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.inn-btn-project {
+  background: #0b1424 !important;
+  border: 1px solid rgba(0, 245, 255, 0.25) !important;
+  color: var(--text) !important;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.inn-btn-project:hover {
+  background: #101e36 !important;
+  border-color: #00f5ff !important;
+  color: #00f5ff !important;
+  box-shadow: 0 0 14px rgba(0, 245, 255, 0.4);
+  transform: translateY(-1px);
+}
+.inn-btn-project.active {
+  background: #00f5ff !important;
+  color: #030508 !important;
+  border-color: #00f5ff !important;
+  box-shadow: 0 0 18px rgba(0, 245, 255, 0.6) !important;
+}
+
+/* Search Bar & Role Select */
+.global-search {
+  background: #0b1424 !important;
+  border: 1px solid rgba(0, 245, 255, 0.3) !important;
+  color: #ffffff !important;
+}
+.global-search:focus {
+  background: #070d18 !important;
+  border-color: #00f5ff !important;
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.4) !important;
+}
+.role-label {
+  background: #0b1424 !important;
+  border: 1px solid rgba(0, 245, 255, 0.3) !important;
+  color: #7dd3fc !important;
+}
+.role-label select {
+  color: #00f5ff !important;
+  background: transparent !important;
+  font-weight: 800 !important;
+}
+.role-label select option {
+  background: #070d18 !important;
+  color: #00f5ff !important;
+}
+
+/* Theme Switcher Controls */
+.theme-switch-group {
+  display: flex;
+  background: #0b1424;
+  border: 1px solid rgba(0, 245, 255, 0.3);
+  border-radius: 20px;
+  padding: 3px;
+  gap: 3px;
+}
+.theme-switch-btn {
+  background: transparent;
+  border: none;
+  color: #7dd3fc;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.theme-switch-btn:hover {
+  color: #00f5ff;
+  background: rgba(0, 245, 255, 0.1);
+}
+.theme-switch-btn.active {
+  background: #00f5ff !important;
+  color: #030508 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.6) !important;
+}
+
+/* Cards & Panels with Neon Obsidian Glass */
+.panel, .card {
+  background: #070d18 !important;
+  border: 1px solid rgba(0, 245, 255, 0.28) !important;
+  color: var(--text) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 10px rgba(0, 245, 255, 0.08) !important;
+}
+.card h3 {
+  color: #00f5ff !important;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.2) !important;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+.page-head h1, .proj-head h1 {
+  color: #ffffff !important;
+  text-shadow: 0 0 12px rgba(0, 245, 255, 0.3);
+}
+
+/* High-Density Data Tables */
+.table-wrap {
+  background: #070d18 !important;
+  border: 1px solid rgba(0, 245, 255, 0.3) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 245, 255, 0.1) !important;
+}
+table.grid th {
+  background: #040812 !important;
+  color: #00f5ff !important;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.35) !important;
+  border-right: 1px solid #091322 !important;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.4);
+}
+table.grid th:hover {
+  background: #0b1424 !important;
+}
+table.grid td {
+  color: var(--text) !important;
+  border-bottom: 1px solid #091322 !important;
+  border-right: 1px solid #091322 !important;
+}
+table.grid tbody tr:hover td {
+  background: #0c1b33 !important;
+}
+table.grid tr.filters td {
+  background: #070d18 !important;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.25) !important;
+}
+table.grid tr.filters input {
+  background: #0b1424 !important;
+  border: 1px solid rgba(0, 245, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+table.grid tr.filters input:focus {
+  border-color: #00f5ff !important;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.4) !important;
+}
+table.grid tfoot td {
+  background: #040812 !important;
+  color: #00f5ff !important;
+  border-top: 2px solid rgba(0, 245, 255, 0.4) !important;
+}
+table.grid tr.group td {
+  background: #0b1424 !important;
+  color: #00f5ff !important;
+  border-top: 1px solid rgba(0, 245, 255, 0.2) !important;
+}
+
+/* Tabs with Glowing Neon Cyan Laser Line */
+.tabs {
+  border-bottom: 1px solid rgba(0, 245, 255, 0.25) !important;
+}
+.tabs a {
+  color: #7dd3fc !important;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+.tabs a:hover {
+  background: #0b1424 !important;
+  color: #00f5ff !important;
+}
+.tabs a.active {
+  color: #00f5ff !important;
+  border-bottom-color: #00f5ff !important;
+  text-shadow: 0 0 12px rgba(0, 245, 255, 0.6) !important;
+}
+.tabs .cnt {
+  background: rgba(0, 245, 255, 0.15) !important;
+  color: #00f5ff !important;
+  border: 1px solid rgba(0, 245, 255, 0.4) !important;
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.2);
+}
+
+/* Micro-Badges & Indicators */
+.pill {
+  background: rgba(0, 245, 255, 0.12) !important;
+  color: #00f5ff !important;
+  border: 1px solid rgba(0, 245, 255, 0.4) !important;
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.25);
+}
+.sigma {
+  background: rgba(0, 245, 255, 0.15) !important;
+  color: #00f5ff !important;
+  border: 1px solid rgba(0, 245, 255, 0.35) !important;
+  font-weight: 800;
+  box-shadow: 0 0 6px rgba(0, 245, 255, 0.2);
+}
+.badge.b-blue {
+  background: rgba(0, 245, 255, 0.15) !important;
+  color: #00f5ff !important;
+  border: 1px solid rgba(0, 245, 255, 0.35) !important;
+}
+.badge.b-green {
+  background: rgba(0, 255, 157, 0.15) !important;
+  color: #00ff9d !important;
+  border: 1px solid rgba(0, 255, 157, 0.35) !important;
+}
+
+/* Kanban Board with Glowing Cyan Headers */
+.kcol {
+  background: #050a14 !important;
+  border: 1px solid rgba(0, 245, 255, 0.25) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+.khead {
+  color: #00f5ff !important;
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.4);
+}
+.khead .count {
+  background: #0b1424 !important;
+  color: #00f5ff !important;
+  border: 1px solid rgba(0, 245, 255, 0.35) !important;
+}
+.kcard {
+  background: #070d18 !important;
+  border: 1px solid rgba(0, 245, 255, 0.2) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+.kcard:hover {
+  border-color: #00f5ff !important;
+  background: #0c172a !important;
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.4) !important;
+  transform: translateY(-2px);
+}
+.kcard .kname {
+  color: #ffffff !important;
+}
+.kcard .kno {
+  color: #00f5ff !important;
+  text-shadow: 0 0 6px rgba(0, 245, 255, 0.3);
+}
+
+/* Split-Pane Document Viewer & Drawing Canvas */
+.viewer {
+  background: #070d18 !important;
+  border: 1px solid rgba(0, 245, 255, 0.3) !important;
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.15);
+}
+.rev {
+  background: #0b1424 !important;
+  border: 1px solid rgba(0, 245, 255, 0.2) !important;
+  color: var(--text) !important;
+}
+.rev:hover {
+  background: #101e36 !important;
+  border-color: #00f5ff !important;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+.rev.viewing {
+  border-color: #00f5ff !important;
+  background: rgba(0, 245, 255, 0.15) !important;
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.4) !important;
+}
+.rev .rname {
+  color: #00f5ff !important;
+}
+.vnav {
+  background: #0b1424 !important;
+  border-color: rgba(0, 245, 255, 0.25) !important;
+  color: #00f5ff !important;
+}
+.docmeta label {
+  color: #7dd3fc !important;
+}
+.docmeta input, .docmeta select {
+  background: #0b1424 !important;
+  border: 1px solid rgba(0, 245, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+
+/* Modals & Forms */
+.mcard {
+  background: #070d18 !important;
+  border: 1px solid #00f5ff !important;
+  color: var(--text) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(0, 245, 255, 0.35) !important;
+}
+.mhead {
+  background: #040812 !important;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.3) !important;
+}
+.mhead h3 {
+  color: #00f5ff !important;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.4);
+}
+.mbody {
+  background: #070d18 !important;
+}
+.mfoot {
+  background: #040812 !important;
+  border-top: 1px solid rgba(0, 245, 255, 0.25) !important;
+}
+.form label {
+  color: #7dd3fc !important;
+}
+.form input, .form select, .form textarea {
+  background: #0b1424 !important;
+  border: 1px solid rgba(0, 245, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+  background: #070d18 !important;
+  border-color: #00f5ff !important;
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.45) !important;
+}
+
+/* Primary Action Buttons */
+.btn.primary, .btn.orange {
+  background: linear-gradient(135deg, #00f5ff, #0284c7) !important;
+  color: #030508 !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.5) !important;
+}
+.btn.primary:hover, .btn.orange:hover {
+  filter: brightness(1.2) !important;
+  box-shadow: 0 0 22px rgba(0, 245, 255, 0.7) !important;
+}
+.btn.ghost {
+  background: #0b1424 !important;
+  border: 1px solid rgba(0, 245, 255, 0.3) !important;
+  color: #00f5ff !important;
+}
+.btn.ghost:hover {
+  background: #101e36 !important;
+  border-color: #00f5ff !important;
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.4) !important;
+}
+
+/* Master Studio Custom Overrides */
+.studio-header {
+  background: #040812 !important;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.35) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 245, 255, 0.15) !important;
+}
+.badge-studio {
+  background: linear-gradient(135deg, #00f5ff, #0284c7) !important;
+  color: #030508 !important;
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.5) !important;
+}
+.studio-brand h1 {
+  color: #ffffff !important;
+}
+.studio-nav {
+  background: #0b1424 !important;
+  border: 1px solid rgba(0, 245, 255, 0.25) !important;
+}
+.studio-nav button {
+  color: #7dd3fc !important;
+}
+.studio-nav button:hover {
+  color: #00f5ff !important;
+  background: rgba(0, 245, 255, 0.1) !important;
+}
+.studio-nav button.active {
+  background: #00f5ff !important;
+  color: #030508 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.5) !important;
+}
+.token-card { background: #070d18 !important; border: 1px solid rgba(0, 245, 255, 0.3) !important; color: var(--text) !important; }
+.token-info b { color: #00f5ff !important; }
+.token-info span { color: #7dd3fc !important; }
+.spec-box { background: #070d18 !important; border: 1px solid rgba(0, 245, 255, 0.3) !important; color: var(--text) !important; }
+.spec-box h3 { color: #00f5ff !important; border-bottom: 2px solid #00f5ff !important; text-shadow: 0 0 8px rgba(0, 245, 255, 0.4); }
+.flow-step { border-left: 3px solid #00f5ff !important; }
+.flow-step h4 { color: #00f5ff !important; }
+.flow-step p { color: #7dd3fc !important; }
+.wireframe-box { background: #0b1424 !important; border-color: rgba(0, 245, 255, 0.3) !important; color: #00f5ff !important; }
+.comparison-table th { background: #040812 !important; color: #00f5ff !important; border: 1px solid rgba(0, 245, 255, 0.25) !important; }
+.comparison-table td { background: #070d18 !important; color: var(--text) !important; border: 1px solid rgba(0, 245, 255, 0.15) !important; }
+.comparison-table tr:nth-child(even) td { background: #0b1424 !important; }
+.sec-hero { background: linear-gradient(135deg, #070d18 0%, #0c172a 100%) !important; border: 1px solid rgba(0, 245, 255, 0.3) !important; }
+
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body data-theme="cyber">
+
+<!-- Master Navigation Bar -->
+<header class="topbar">
+  <div class="brand" onclick="location.hash='#/projects/grid'">
+    <span class="logo">Q</span>
+    <span>Quade<b>Connect</b></span>
+    <span class="module">Neon Cyan Edition</span>
+  </div>
+
+  <nav class="topnav">
+    <a href="#/projects/grid" id="nav-projects">Projects Master Grid</a>
+    <a href="#/projects/kanban">Kanban Board</a>
+    <a href="#/projects/gantt">Gantt Timeline</a>
+  </nav>
+
+  <div class="top-right">
+    <input id="globalSearch" class="global-search" placeholder="Search Proj No, Name, Customer...">
+    
+    
+    <!-- Neon Cyan Active Indicator & Theme Bar -->
+    <div class="theme-switch-group" title="Active Theme: Neon Cyan Cyberpunk">
+      <button class="theme-switch-btn active" id="btn-theme-cyber" onclick="setAppTheme('cyber')">⚡ Neon Cyan (Active)</button>
+      <button class="theme-switch-btn" id="btn-theme-amber" onclick="setAppTheme('amber')">🔥 Amber</button>
+      <button class="theme-switch-btn" id="btn-theme-emerald" onclick="setAppTheme('emerald')">🧪 Emerald</button>
+      <button class="theme-switch-btn" id="btn-theme-light" onclick="setAppTheme('light')">☀️ Light</button>
+    </div>
+
+
+    <!-- Role-Based Cost Masking Simulator -->
+    <label class="role-label" title="Switch user role to test cost masking and project scoping">
+      <span>Role:</span>
+      <select id="roleSelect"></select>
+    </label>
+
+    <button class="btn ghost small" onclick="resetDemo()" title="Reset demo data to default">Reset</button>
+  </div>
+</header>
+
+<!-- Quick Project Switcher Subbar -->
+<div class="inn-subbar">
+  <div class="inn-quicklinks">
+    <span style="font-size:11px;font-weight:700;color:#00f5ff;text-transform:uppercase;text-shadow:0 0 8px rgba(0,245,255,0.4)">Quick Jump:</span>
+    <button class="inn-btn-project active" onclick="location.hash='#/project/P-26-1132/shop'">
+      <span>🏢</span> P-26-1132 AUS Project Oasis (52 Shop Drawings)
+    </button>
+    <button class="inn-btn-project" onclick="location.hash='#/project/P-26-1137/sheets'">
+      <span>🏛️</span> P-26-1137 BWI Project Oasis (216 Sheets)
+    </button>
+    <button class="inn-btn-project" onclick="location.hash='#/project/P-26-1132/workorders'">
+      <span>🔨</span> 199 Work Orders
+    </button>
+    <button class="inn-btn-project" onclick="location.hash='#/project/P-26-1132/qc'">
+      <span>🔍</span> QC Review Queue
+    </button>
+    <button class="inn-btn-project" onclick="location.hash='#/project/P-26-1132/submittals'">
+      <span>📋</span> Submittals Transmittals
+    </button>
+  </div>
+  <div style="font-size:11.5px;color:#7dd3fc;font-weight:600">
+    Domain: Innergy Architectural Millwork + ClickUp High-Density UX
+  </div>
+</div>
+
+<!-- Main Dynamic Content Canvas -->
+<main id="view"></main>
+
+<!-- Modals & Notifications Container -->
+<div id="modal"></div>
+<div id="toast"></div>
+
+<!-- Embedded Full Application Engine -->
+<script>
+const AVAILABLE_THEMES = ['cyber', 'amber', 'emerald', 'light'];
+
+// Theme Management Functions
+function setAppTheme(themeName) {
+  if (!AVAILABLE_THEMES.includes(themeName)) themeName = 'cyber';
+  
+  document.documentElement.setAttribute('data-theme', themeName);
+  document.body.setAttribute('data-theme', themeName);
+  localStorage.setItem('quadeconnect_theme', themeName);
+  
+  // Update button active state
+  AVAILABLE_THEMES.forEach(t => {
+    const btn = document.getElementById('btn-theme-' + t);
+    if (btn) {
+      if (t === themeName) btn.classList.add('active');
+      else btn.classList.remove('active');
+    }
+  });
+
+  if (typeof toast === 'function') {
+    toast('Switched to ' + themeName.toUpperCase() + ' Theme');
+  }
+}
+
+// Initialize Theme to 'cyber' (Neon Cyan)
+(function initTheme() {
+  setAppTheme('cyber');
+})();
+
+'use strict';
+/* =====================================================================
+   QuadeConnect PM — data.js
+   Seed data (mirrors the Innergy reference screens), constants, state,
+   persistence and Role-Based Access Control helpers.
+   ===================================================================== */
+
+const STORE_KEY = 'quadeconnect_pm_demo_v1';
+const STAGES = ['Study / Pre-Bid', 'Engineering', 'QC Review', 'Submittal', 'Fabrication', 'Installation', 'Closeout'];
+const STAGE_COLORS = {
+  'Study / Pre-Bid': '#0d9488', 'Engineering': '#2563eb', 'QC Review': '#7c3aed', 'Submittal': '#d97706',
+  'Fabrication': '#ea580c', 'Installation': '#16a34a', 'Closeout': '#475569'
+};
+const TRADES = ['Engineering', 'Fabrication', 'Finishing', 'Installation'];
+const WO_STATUSES = ['Draft', 'Engineering', 'Approved', 'Released to Fab', 'In Production', 'Shipped', 'Installed', 'Closed'];
+const FILE_CATS = ['Contracts', 'Specifications', 'Cut Sheets', 'Client Uploads', 'Photos', 'Shared with Client'];
+const CLIENT_FILE_CATS = ['Client Uploads', 'Shared with Client'];
+const QC_CHECKLIST = [
+  'Dimensions match architectural sheets & field verification',
+  'Material / substrate callouts correct',
+  'Veneer species, cut & grain direction indicated',
+  'Edge banding specified on all exposed edges',
+  'Hardware matches hardware schedule',
+  'Joinery & assembly details complete',
+  'Wall blocking / mounting method shown',
+  'ADA clearances & heights verified',
+  'Fire rating requirements met',
+  'Title block, revision & Work Order reference complete'
+];
+
+/* ---------- small helpers ---------- */
+let _seed = 7;
+const rnd = () => { _seed = (_seed * 16807) % 2147483647; return (_seed - 1) / 2147483646; };
+const pick = a => a[Math.floor(rnd() * a.length)];
+const uid = () => Math.random().toString(36).slice(2, 10);
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmt$ = n => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const fmtPct = n => (Number(n || 0)).toFixed(n && n % 1 ? 2 : 0) + '%';
+const sum = o => Object.values(o || {}).reduce((a, b) => a + Number(b || 0), 0);
+const isoAdd = (iso, days) => { const d = new Date(iso + 'T00:00:00'); d.setDate(d.getDate() + days); return d.toISOString().slice(0, 10); };
+const fmtDate = iso => { if (!iso) return ''; const [y, m, d] = iso.split('-'); return `${m}/${d}/${y}`; };
+const todayIso = () => new Date().toISOString().slice(0, 10);
+const nowStr = () => new Date().toLocaleString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+/* ---------- Seed ---------- */
+function buildSeed() {
+  _seed = 7;
+  // [no, name, customer, originalContract, currentContract, workOrdersValue, billed, estGrandTotalCost]  (from reference Image 1)
+  const base = [
+    [1137, 'BWI Project Oasis (Baltimore)', 'Whiting Turner - DC - Washington', 6573906, 8838759, 0, 0, 6278759],
+    [1136, '[26019N] Omni Midland Hotel', 'Beck Group - Dallas', 4006216, 4229775, 4229775.01, 0, 3123304],
+    [1135, '[26022R] BNA Project Oasis (Nashville)', 'Hensel Phelps - Nashville', 7180842, 9563814, 9563814, 0, 7303613],
+    [1134, '[26020R] NXP Champion', 'Novo Construction - Austin', 2319437, 2242008, 2242008, 23511.60, 2045904],
+    [1133, '[26018R] Samsung Observation Deck', 'Austin Commercial LP - Dallas', 7700, 7700, 7700, 7700, 6180],
+    [1132, '[26011R] AUS Project Oasis (Austin)', 'Hensel Phelps - Austin', 363375, 5114150, 5114150.01, 347137.50, 3812367],
+    [1131, '[26016N] Hotel Vin Reserve', 'Manhattan Construction - Dallas', 2532552, 1793137, 1793137, 0, 1270391],
+    [1130, '[26017N] 600G Ice Machine Panels', 'Kairoi Residential - Austin', 2201, 2201, 2201, 1100.50, 1430],
+    [1129, '[26014R] Sunnyvale Millwork - Panel Fix', 'Sunnyvale Millwork - Main', 49928.21, 77337, 77337, 77337, 55379],
+    [1128, '[26015X] Trinity School of Midland', 'W.S. Bellows Construction Corp. - Houston', 2728885, 2630575, 2630575, 0, 1955468],
+    [1127, '[26010N] Loews Arlington III', 'JE Dunn - Dallas', 5981351, 8367667, 8367667, 0, 6298853]
+  ];
+  const stages = ['Engineering', 'Study / Pre-Bid', 'Fabrication', 'Submittal', 'Closeout', 'Engineering', 'QC Review', 'Fabrication', 'Closeout', 'Installation', 'Installation'];
+  const pms = ['Rob Redmond', 'Christopher Holland', 'Ariana Samarripa', 'Marcus Reed'];
+
+  const projects = base.map((b, i) => {
+    const hb = { Engineering: 300 + Math.round(rnd() * 500), Fabrication: 900 + Math.round(rnd() * 1500), Finishing: 200 + Math.round(rnd() * 400), Installation: 300 + Math.round(rnd() * 600) };
+    const done = { 'Study / Pre-Bid': .05, 'Engineering': .3, 'QC Review': .4, 'Submittal': .45, 'Fabrication': .65, 'Installation': .85, 'Closeout': 1 }[stages[i]];
+    const hl = {}; TRADES.forEach((t, ti) => hl[t] = Math.round(hb[t] * Math.min(1.1, done * (ti === 0 ? 1.4 : ti === 3 ? 0.7 : 1) * (0.8 + rnd() * 0.4))));
+    return {
+      no: 'P-26-' + b[0], name: b[1], customer: b[2],
+      origContract: b[3], currentContract: b[4], woValue: b[5], billed: b[6], estCost: b[7],
+      stage: stages[i], pm: pms[i % 4], priority: pick(['Critical', 'High', 'Normal', 'Normal', 'Low']),
+      start: isoAdd('2026-05-04', i * 12), due: isoAdd('2026-11-30', 40 - i * 9 + Math.round(rnd() * 90)),
+      location: b[2].split(' - ').pop(), architect: pick(['PGAL', 'Gensler', 'HKS Architects', 'Page Southerland Page']),
+      awiGrade: pick(['Premium', 'Custom']), veneer: pick(['Rift White Oak', 'Plain Sliced Walnut', 'Quarter Sawn Maple', 'HPL / Solid Surface']),
+      hoursBudget: hb, hoursLogged: hl
+    };
+  });
+
+  const users = [
+    { id: 'u1', name: 'Sarah Mitchell', role: 'Admin', projects: [] },
+    { id: 'u2', name: 'Marcus Reed', role: 'Operations Head', projects: ['P-26-1132', 'P-26-1137', 'P-26-1135'] },
+    { id: 'u3', name: 'Christopher Holland', role: 'Engineer', projects: ['P-26-1132', 'P-26-1137'] },
+    { id: 'u4', name: 'Ariana Samarripa', role: 'QC Reviewer', projects: ['P-26-1132', 'P-26-1136'] },
+    { id: 'u5', name: 'Hensel Phelps (Client)', role: 'Client', projects: ['P-26-1132'] }
+  ];
+
+  const children = {};
+  projects.forEach(p => children[p.no] = genChildren(p));
+  return { version: 1, currentUser: 'u1', rates: { Engineering: 65, Fabrication: 45, Finishing: 48, Installation: 55 }, users, projects, children };
+}
+
+function genChildren(p) {
+  const n = p.no;
+  const woNames = ['Table of Contents / General', 'Restroom Mockup Vanities', '102.5 Bar Counter', 'Lobby Reception Desk', 'Lobby Wall Panels'];
+  const workOrders = woNames.map((nm, i) => ({
+    id: uid(), no: `${n}-${String(11 + i * 7).padStart(3, '0')}p`, name: nm,
+    status: pick(WO_STATUSES.slice(0, 6)), value: Math.round((p.woValue || p.currentContract) / 5 * (0.6 + rnd() * 0.8)),
+    budgetHours: 80 + Math.round(rnd() * 300), actualHours: Math.round(rnd() * 250), shipDate: isoAdd(p.start, 60 + i * 20)
+  }));
+
+  const sheetT = [['G0.00', 'COVER SHEET'], ['G0.01', 'SHEET INDEX'], ['G0.02', 'PROJECT INFORMATION'], ['G0.10', 'ADA STANDARDS'],
+    ['G0.20', 'RESPONSIBILITY MATRIX'], ['G1.01', 'LIFE SAFETY CODE ANALYSIS'], ['A2.01', 'FLOOR PLAN - LEVEL 1'], ['A5.10', 'INTERIOR ELEVATIONS'], ['A8.01', 'MILLWORK DETAILS']];
+  const sheets = sheetT.map(([num, name], i) => {
+    const versions = [{ id: uid(), name: '90 IFP', issue: '2026-07-31', pages: 1 + Math.floor(rnd() * 5), by: 'Rob Redmond', uploaded: '08/11/2026 08:16 AM' }];
+    if (rnd() < 0.4) versions.push({ id: uid(), name: 'Bulletin 01', issue: '2026-08-31', pages: 1 + Math.floor(rnd() * 5), by: 'Rob Redmond', uploaded: '09/03/2026 06:31 AM' });
+    return { id: uid(), number: num, name, versions, current: versions.length - 1, tags: i < 6 ? ['General'] : ['Millwork Scope'], published: rnd() < 0.8, markups: rnd() < 0.2 };
+  });
+
+  const shopT = [['100.10', 'TABLE OF CONTENTS', 0], ['101.00', 'RESTROOM MOCKUP', 1], ['101.01', 'RESTROOM MOCKUP', 1], ['101.02', 'RESTROOM MOCKUP', 1],
+    ['102.49', '102.5 BAR COUNTER', 2], ['102.50', '102.5 BAR COUNTER', 2], ['201.00', 'RECEPTION DESK', 3], ['301.00', 'WALL PANELS - LOBBY', 4]];
+  const shop = shopT.map(([num, name, wo]) => {
+    const count = 1 + Math.floor(rnd() * 3);
+    const versions = [];
+    for (let k = 1; k <= count; k++) versions.push({ id: uid(), name: `MOCKUP PACKAGE # ${k}`, issue: isoAdd('2026-08-18', k * 10), pages: 1 + Math.floor(rnd() * 9), by: pick(['Christopher Holland', 'Ariana Samarripa']), uploaded: fmtDate(isoAdd('2026-08-18', k * 10)) + ' 03:31 PM' });
+    const qc = pick(['Pending QC', 'QC Approved', 'QC Approved', 'Rejected']);
+    return { id: uid(), number: num, name, woId: workOrders[wo].id, versions, current: versions.length - 1, tags: ['Mockup'], qcStatus: qc, qcHistory: [], published: qc === 'QC Approved' && rnd() < 0.8, markups: false };
+  });
+
+  const files = [
+    ['Signed Subcontract Agreement.pdf', 'Contracts', '1.2 MB'], ['Spec Section 06 41 00 - Architectural Casework.pdf', 'Specifications', '840 KB'],
+    ['Blum Hinge Cutsheet.pdf', 'Cut Sheets', '410 KB'], ['Hardware Schedule Rev 2.xlsx', 'Specifications', '96 KB'],
+    ['Architect Finish Selections.pdf', 'Client Uploads', '3.4 MB'], ['Site Photos - Level 1.zip', 'Photos', '48 MB'],
+    ['Approved Veneer Sample Photo.jpg', 'Shared with Client', '2.1 MB']
+  ].map(([name, cat, size]) => ({ id: uid(), name, cat, size, by: cat === 'Client Uploads' ? 'Client' : 'Rob Redmond', date: '09/0' + (1 + Math.floor(rnd() * 8)) + '/2026', key: `s3://quadeconnect-prod/projects/${n}/files/${slug(cat)}/${name}` }));
+
+  const appr = shop.filter(s => s.qcStatus === 'QC Approved').map(s => s.id);
+  const submittals = [
+    { id: uid(), no: 'SUB-001', title: 'Restroom Mockup Shop Drawings', spec: '06 41 00 Architectural Wood Casework', rev: 0, status: 'Approved', ball: '—', drawings: appr.slice(0, 2), sent: '2026-09-10', due: '2026-09-24', history: [{ t: '09/18/2026', user: 'Architect', text: 'Approved' }] },
+    { id: uid(), no: 'SUB-002', title: 'Bar Counter Shop Drawings & Finish Samples', spec: '06 41 00 Architectural Wood Casework', rev: 1, status: 'Submitted', ball: 'Client', drawings: appr.slice(2, 3), sent: '2026-10-01', due: '2026-10-15', history: [{ t: '09/20/2026', user: 'Architect', text: 'Revise & Resubmit — edge profile' }] },
+    { id: uid(), no: 'SUB-003', title: 'Reception Desk Hardware Product Data', spec: '08 71 00 Door Hardware', rev: 0, status: 'Draft', ball: 'Engineering', drawings: [], sent: '', due: '', history: [] }
+  ];
+
+  const studies = [
+    { id: uid(), no: 'ST-01', title: 'Curved reception desk framing study', engineer: 'Christopher Holland', status: 'In Progress', budgetHours: 24, loggedHours: 14, convertedWo: '' },
+    { id: uid(), no: 'ST-02', title: 'Rift white oak veneer flitch yield study', engineer: 'Ariana Samarripa', status: 'Complete', budgetHours: 12, loggedHours: 12, convertedWo: '' }
+  ];
+
+  const activity = [
+    { t: '10/05/2026 11:15 AM', user: 'Ariana Samarripa', text: 'Uploaded Shop Drawing 100.10 — MOCKUP PACKAGE # 5' },
+    { t: '09/03/2026 06:31 AM', user: 'Rob Redmond', text: 'Uploaded Bulletin 01 sheets' },
+    { t: '08/11/2026 08:16 AM', user: 'Rob Redmond', text: 'Uploaded and processed 90 IFP sheet set' }
+  ];
+  return { workOrders, studies, sheets, shop, files, submittals, activity };
+}
+
+/* ---------- State & persistence ---------- */
+let state;
+const memCache = {}; // in-memory blobs for uploaded files (simulates S3 objects for this browser session)
+function load() {
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY)); } catch (e) { state = null; }
+  if (!state || state.version !== 1) state = buildSeed();
+}
+function save() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { toast('Storage full — changes kept for this session only'); }
+}
+function resetDemo() {
+  if (!confirm('Reset all demo data?')) return;
+  localStorage.removeItem(STORE_KEY); state = buildSeed(); save(); initRoleSelect(); location.hash = '#/projects/grid'; route();
+}
+
+/* ---------- RBAC (mirrors backend middleware — see backend/src/rbac.js) ---------- */
+const COST_FIELDS = ['origContract', 'currentContract', 'woValue', 'billed', 'estCost'];
+const me = () => state.users.find(u => u.id === state.currentUser);
+const role = () => me().role;
+const isAdmin = () => role() === 'Admin';
+const isClient = () => role() === 'Client';
+const canSeeCost = () => isAdmin();
+const canEditDocs = () => ['Admin', 'Operations Head', 'Engineer'].includes(role());
+const canManage = () => ['Admin', 'Operations Head'].includes(role());
+const canQC = () => ['Admin', 'Operations Head', 'QC Reviewer'].includes(role());
+const canLogHours = () => !isClient();
+const visibleProjects = () => isAdmin() ? state.projects : state.projects.filter(p => me().projects.includes(p.no));
+const canAccess = no => isAdmin() || me().projects.includes(no);
+/** Strip cost fields exactly like the API serializer does for non-admin roles. */
+function sanitize(p) {
+  if (canSeeCost()) return p;
+  const copy = { ...p }; COST_FIELDS.forEach(f => delete copy[f]); return copy;
+}
+function log(no, text) {
+  state.children[no].activity.unshift({ t: nowStr(), user: me().name, text });
+}
+function toast(msg) {
+  const d = document.createElement('div'); d.textContent = msg; $('#toast').appendChild(d); setTimeout(() => d.remove(), 3200);
+}
+
+
+
+'use strict';
+/* =====================================================================
+   QuadeConnect PM — views.js
+   Router + Master Projects views: Grid (Innergy style), Kanban, Gantt
+   ===================================================================== */
+
+const ui = { grid: { q: {}, sort: { k: 'no', dir: -1 }, group: '', page: 1, size: 25 }, docId: null, viewVer: 0, slide: 0, zoom: 1, compare: false, fileCat: 'All', docSearch: '' };
+
+/* ---------- Router ---------- */
+function route() {
+  const h = location.hash.replace(/^#\/?/, '') || 'projects/grid';
+  const parts = h.split('/');
+  closeModal();
+  if (parts[0] === 'project' && parts[1]) return renderProject(decodeURIComponent(parts[1]), parts[2] || 'details', parts[3]);
+  return renderProjects(parts[1] || 'grid');
+}
+
+function initRoleSelect() {
+  $('#roleSelect').innerHTML = state.users.map(u => `<option value="${u.id}" ${u.id === state.currentUser ? 'selected' : ''}>${esc(u.name)} — ${u.role}</option>`).join('');
+}
+
+/* ---------- Projects list page ---------- */
+function renderProjects(view) {
+  const label = { grid: 'Grid', kanban: 'Kanban', gantt: 'Gantt' }[view] || 'Grid';
+  const banner = isAdmin()
+    ? `<div class="role-banner"><b>Admin view:</b> all ${state.projects.length} projects with full contract, billing and cost columns.</div>`
+    : `<div class="role-banner restricted"><b>${role()} view (${esc(me().name)}):</b> you only see the ${visibleProjects().length} project(s) you are assigned to. Contract values, billing and costs are hidden.</div>`;
+  $('#view').innerHTML = `
+    <div class="crumb"><span class="chev">›</span> <a href="#/projects/grid">Projects</a> › ${label}</div>
+    <div class="page-head"><h1>Projects</h1>
+      <div class="view-switch">
+        <button class="${view === 'grid' ? 'active' : ''}" onclick="location.hash='#/projects/grid'">▦ Grid</button>
+        <button class="${view === 'kanban' ? 'active' : ''}" onclick="location.hash='#/projects/kanban'">▥ Kanban</button>
+        <button class="${view === 'gantt' ? 'active' : ''}" onclick="location.hash='#/projects/gantt'">▤ Gantt</button>
+      </div></div>
+    ${banner}
+    <div id="pview"></div>`;
+  if (view === 'kanban') renderKanban(); else if (view === 'gantt') renderGantt(); else renderGrid();
+}
+
+/* ---------- GRID ---------- */
+function gridColumns() {
+  const c = [{ k: 'no', l: 'Proj No.', t: 'link' }, { k: 'name', l: 'Name', t: 'link' }, { k: 'customer', l: 'Customer' }];
+  if (canSeeCost()) c.push(
+    { k: 'origContract', l: 'Original Total Contract', t: '$' }, { k: 'currentContract', l: 'Current Contract Value', t: '$' },
+    { k: 'woValue', l: 'Work Orders Value', t: '$' }, { k: 'billed', l: 'Billed', t: '$' }, { k: 'billedPct', l: 'Billed %', t: '%' },
+    { k: 'estCost', l: 'Estimated Grand Total Cost', t: '$' });
+  c.push({ k: 'stage', l: 'Stage', t: 'stage' }, { k: 'pm', l: 'PM' }, { k: 'priority', l: 'Priority', t: 'prio' },
+    { k: 'due', l: 'Target Date', t: 'date' }, { k: 'hoursPct', l: 'Hours Used', t: 'hrs' });
+  return c;
+}
+function rowData(p) {
+  const s = sanitize(p); const hb = sum(p.hoursBudget), hl = sum(p.hoursLogged);
+  const r = { ...s, hb, hl, hoursPct: hb ? hl / hb * 100 : 0 };
+  if (canSeeCost()) r.billedPct = p.currentContract ? p.billed / p.currentContract * 100 : 0;
+  return r;
+}
+function renderGrid() {
+  const cols = gridColumns(); const g = ui.grid;
+  $('#pview').innerHTML = `
+    <div class="panel">
+      <div class="toolbar">
+        <span class="hint">Group by</span>
+        <select onchange="ui.grid.group=this.value;renderGridBody()">
+          ${[['', 'None'], ['customer', 'Customer'], ['stage', 'Stage'], ['pm', 'Project Manager'], ['priority', 'Priority']].map(([v, l]) => `<option value="${v}" ${g.group === v ? 'selected' : ''}>${l}</option>`).join('')}
+        </select>
+        <span class="spacer"></span>
+        <button class="btn ghost small" onclick="clearFilters()">Clear filters</button>
+        <button class="btn ghost small" onclick="exportCsv()">⤓ Export CSV</button>
+      </div>
+      <div class="table-wrap"><table class="grid">
+        <thead><tr>${cols.map(c => `<th class="${['$', '%', 'hrs'].includes(c.t) ? 'num' : ''}" onclick="sortBy('${c.k}')">${c.l} ${g.sort.k === c.k ? (g.sort.dir > 0 ? '▲' : '▼') : ''}</th>`).join('')}</tr>
+          <tr class="filters">${cols.map(c => `<td><input placeholder="🔍" value="${esc(g.q[c.k] || '')}" oninput="ui.grid.q['${c.k}']=this.value;ui.grid.page=1;renderGridBody()"></td>`).join('')}</tr></thead>
+        <tbody id="gridBody"></tbody><tfoot id="gridFoot"></tfoot>
+      </table></div>
+      <div class="pager" id="gridPager"></div>
+    </div>`;
+  renderGridBody();
+}
+function filteredRows() {
+  const cols = gridColumns(); const g = ui.grid;
+  let rows = visibleProjects().map(rowData);
+  cols.forEach(c => {
+    const q = (g.q[c.k] || '').toLowerCase().trim();
+    if (q) rows = rows.filter(r => String(c.t === 'date' ? fmtDate(r[c.k]) : r[c.k] ?? '').toLowerCase().includes(q));
+  });
+  const k = g.sort.k, d = g.sort.dir;
+  rows.sort((a, b) => (a[k] > b[k] ? 1 : a[k] < b[k] ? -1 : 0) * d);
+  return rows;
+}
+function cellHTML(c, r) {
+  const v = r[c.k];
+  switch (c.t) {
+    case 'link': return `<a href="#/project/${encodeURIComponent(r.no)}/details">${esc(v)}</a>`;
+    case '$': return fmt$(v);
+    case '%': return fmtPct(v);
+    case 'date': return fmtDate(v);
+    case 'stage': return `<span class="badge" style="background:${STAGE_COLORS[v]}22;color:${STAGE_COLORS[v]}">${esc(v)}</span>`;
+    case 'prio': return `<span class="prio ${v}">⚑ ${v}</span>`;
+    case 'hrs': return `<div style="display:flex;gap:6px;align-items:center;justify-content:flex-end"><span>${r.hl}/${r.hb}h</span><div class="bar"><span class="${v > 100 ? 'over' : ''}" style="width:${Math.min(100, v)}%"></span></div></div>`;
+    default: return esc(v);
+  }
+}
+function renderGridBody() {
+  const cols = gridColumns(); const g = ui.grid; const rows = filteredRows();
+  const rowHTML = r => `<tr>${cols.map(c => `<td class="${['$', '%', 'hrs'].includes(c.t) ? 'num' : ''}">${cellHTML(c, r)}</td>`).join('')}</tr>`;
+  let body = '';
+  if (g.group) {
+    const groups = {}; rows.forEach(r => (groups[r[g.group]] = groups[r[g.group]] || []).push(r));
+    Object.keys(groups).sort().forEach(k => {
+      body += `<tr class="group"><td colspan="${cols.length}">${esc(k)} (${groups[k].length})</td></tr>` + groups[k].map(rowHTML).join('');
+    });
+    $('#gridPager').innerHTML = `<span>${rows.length} items</span>`;
+  } else {
+    const pages = Math.max(1, Math.ceil(rows.length / g.size)); g.page = Math.min(g.page, pages);
+    body = rows.slice((g.page - 1) * g.size, g.page * g.size).map(rowHTML).join('');
+    $('#gridPager').innerHTML = [25, 50, 100, 500].map(s => `<a class="${g.size === s ? 'active' : ''}" onclick="ui.grid.size=${s};ui.grid.page=1;renderGridBody()">${s}</a>`).join(' ')
+      + `<span style="margin-left:auto">${rows.length ? (g.page - 1) * g.size + 1 : 0} - ${Math.min(rows.length, g.page * g.size)} of ${rows.length} items</span>`
+      + Array.from({ length: pages }, (_, i) => `<a class="${g.page === i + 1 ? 'active' : ''}" onclick="ui.grid.page=${i + 1};renderGridBody()">${i + 1}</a>`).join(' ');
+  }
+  $('#gridBody').innerHTML = body || `<tr><td colspan="${cols.length}" style="text-align:center;color:#6b7280;padding:20px">No projects match.</td></tr>`;
+  // Footer totals (portfolio sums) — only meaningful for currency columns => Admin only
+  $('#gridFoot').innerHTML = canSeeCost()
+    ? `<tr>${cols.map(c => `<td class="num">${c.t === '$' ? fmt$(rows.reduce((a, r) => a + Number(r[c.k] || 0), 0)) : ''}</td>`).join('')}</tr>` : '';
+}
+function sortBy(k) { const s = ui.grid.sort; s.dir = s.k === k ? -s.dir : 1; s.k = k; renderGrid(); }
+function clearFilters() { ui.grid.q = {}; ui.grid.group = ''; renderGrid(); }
+function exportCsv() {
+  const cols = gridColumns(); const rows = filteredRows();
+  const csv = [cols.map(c => `"${c.l}"`).join(',')].concat(rows.map(r => cols.map(c => `"${String(r[c.k] ?? '').replace(/"/g, '""')}"`).join(','))).join('\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'projects.csv'; a.click();
+}
+
+/* ---------- KANBAN ---------- */
+function renderKanban() {
+  const ps = visibleProjects(); const drag = canMoveStage();
+  $('#pview').innerHTML = `<div class="hint" style="margin-bottom:8px">${drag ? 'Drag cards between columns to move a project to the next millwork stage.' : 'Read-only: only Admin / Operations Head can move project stages.'}</div>
+  <div class="kanban">${STAGES.map(st => {
+    const cards = ps.filter(p => p.stage === st);
+    return `<div class="kcol" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="dropStage(event,'${st}')">
+      <div class="khead" style="border-top-color:${STAGE_COLORS[st]}">${st}<span class="count">${cards.length}</span></div>
+      ${cards.map(p => kanbanCard(p, drag)).join('')}</div>`;
+  }).join('')}</div>`;
+}
+function canMoveStage() { return canManage(); }
+function kanbanCard(p, drag) {
+  const ch = state.children[p.no]; const hb = sum(p.hoursBudget), hl = sum(p.hoursLogged); const pct = hb ? hl / hb * 100 : 0;
+  const pendingQc = ch.shop.filter(s => s.qcStatus === 'Pending QC').length;
+  return `<div class="kcard" ${drag ? 'draggable="true"' : ''} ondragstart="event.dataTransfer.setData('text','${p.no}')" onclick="location.hash='#/project/${p.no}/details'">
+    <div class="kno">${p.no}</div><div class="kname">${esc(p.name)}</div><div class="kcust">${esc(p.customer)}</div>
+    <div class="kmeta"><span class="badge b-gray">${ch.sheets.length} Sheets</span><span class="badge b-gray">${ch.shop.length} Shop Dwgs</span>
+      <span class="badge b-gray">${ch.workOrders.length} WOs</span>${pendingQc ? `<span class="badge b-purple">${pendingQc} QC</span>` : ''}</div>
+    <div class="kfoot"><span class="prio ${p.priority}">⚑ ${p.priority}</span><span>${esc(p.pm)}</span></div>
+    <div class="kfoot"><div class="bar" style="flex:1;margin-right:6px"><span class="${pct > 100 ? 'over' : ''}" style="width:${Math.min(100, pct)}%"></span></div><span>${Math.round(pct)}% hrs</span></div>
+    ${canSeeCost() ? `<div class="kfoot"><span class="hint">Contract</span><b>${fmt$(p.currentContract)}</b></div>` : ''}
+  </div>`;
+}
+function dropStage(ev, stage) {
+  ev.preventDefault();
+  if (!canMoveStage()) return toast('You do not have permission to move stages');
+  const no = ev.dataTransfer.getData('text'); const p = state.projects.find(x => x.no === no);
+  if (!p || p.stage === stage) return renderKanban();
+  log(no, `Moved project stage: ${p.stage} → ${stage}`); p.stage = stage; save(); renderKanban(); toast(`${no} moved to ${stage}`);
+}
+
+/* ---------- GANTT ---------- */
+function renderGantt() {
+  const ps = [...visibleProjects()].sort((a, b) => a.start.localeCompare(b.start));
+  if (!ps.length) { $('#pview').innerHTML = '<div class="panel">No projects.</div>'; return; }
+  const min = new Date(ps.reduce((m, p) => p.start < m ? p.start : m, ps[0].start) + 'T00:00:00'); min.setDate(1);
+  const maxIso = ps.reduce((m, p) => p.due > m ? p.due : m, ps[0].due);
+  const max = new Date(maxIso + 'T00:00:00'); max.setMonth(max.getMonth() + 1, 1);
+  const span = max - min; const months = [];
+  for (let d = new Date(min); d < max; d.setMonth(d.getMonth() + 1)) months.push(d.toLocaleString('en-US', { month: 'short', year: '2-digit' }));
+  const pos = iso => ((new Date(iso + 'T00:00:00') - min) / span * 100);
+  const today = pos(todayIso());
+  $('#pview').innerHTML = `<div class="gantt">
+    <div class="grow"><div class="glabel"><b>Project</b></div><div class="gmonths">${months.map(m => `<div>${m}</div>`).join('')}</div></div>
+    ${ps.map(p => `<div class="grow"><div class="glabel"><a href="#/project/${p.no}/details">${p.no}</a> ${esc(p.name)}</div>
+      <div class="gtrack">${today >= 0 && today <= 100 ? `<div class="gtoday" style="left:${today}%"></div>` : ''}
+        <div class="gbar" title="${fmtDate(p.start)} → ${fmtDate(p.due)}" style="left:${pos(p.start)}%;width:${Math.max(2, pos(p.due) - pos(p.start))}%;background:${STAGE_COLORS[p.stage]}">${p.stage}</div></div></div>`).join('')}
+  </div><div class="hint" style="margin-top:6px">Bars run from project start to target completion; colour = current millwork stage; orange line = today.</div>`;
+}
+
+/* ---------- Modal helpers ---------- */
+function openModal(title, body, foot, wide) {
+  $('#modal').innerHTML = `<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal ${wide ? 'wide' : ''}">
+    <div class="mhead"><span>${title}</span><button onclick="closeModal()">×</button></div>
+    <div class="mbody">${body}</div><div class="mfoot">${foot || '<button class="btn ghost" onclick="closeModal()">Close</button>'}</div></div></div>`;
+}
+function closeModal() { const m = $('#modal'); if (m) m.innerHTML = ''; }
+
+/* ---------- Boot ---------- */
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  load(); initRoleSelect();
+  $('#roleSelect').addEventListener('change', e => { state.currentUser = e.target.value; save(); ui.docId = null; toast(`Now viewing as ${me().name} (${role()})`); location.hash = '#/projects/grid'; route(); });
+  $('#globalSearch').addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return; ui.grid.q = { name: e.target.value }; location.hash = '#/projects/grid'; route();
+  });
+  window.addEventListener('hashchange', route);
+  route();
+});
+
+
+
+'use strict';
+/* =====================================================================
+   QuadeConnect PM — project.js
+   Inside a project: header, category tabs, Details (+ Hours Pay Plan,
+   team access), Work Orders, Study Projects, Activity.
+   ===================================================================== */
+
+function projectTabs(p, ch) {
+  const pub = list => isClient() ? list.filter(d => d.published).length : list.length;
+  const all = [
+    { k: 'details', l: 'Details' },
+    { k: 'workorders', l: 'Work Orders', n: ch.workOrders.length },
+    { k: 'studies', l: 'Study Projects', n: ch.studies.length },
+    { k: 'sheets', l: 'Sheets', n: pub(ch.sheets) },
+    { k: 'shop', l: 'Shop Drawings', n: pub(ch.shop) },
+    { k: 'files', l: 'Files', n: isClient() ? ch.files.filter(f => CLIENT_FILE_CATS.includes(f.cat)).length : ch.files.length },
+    { k: 'qc', l: 'QC Review', n: ch.shop.filter(s => s.qcStatus === 'Pending QC').length },
+    { k: 'submittals', l: 'Submittals', n: isClient() ? ch.submittals.filter(s => s.status !== 'Draft').length : ch.submittals.length },
+    { k: 'activity', l: 'Activity' }
+  ];
+  const clientTabs = ['details', 'sheets', 'shop', 'files', 'submittals'];
+  return isClient() ? all.filter(t => clientTabs.includes(t.k)) : all;
+}
+
+function renderProject(no, tab, id) {
+  const p = state.projects.find(x => x.no === no);
+  if (!p) { $('#view').innerHTML = `<div class="denied">Project ${esc(no)} not found.</div>`; return; }
+  if (!canAccess(no)) {
+    $('#view').innerHTML = `<div class="denied"><h2>Access denied</h2><p>${esc(me().name)} (${role()}) is not assigned to ${esc(no)}.</p><a href="#/projects/grid">Back to my projects</a></div>`; return;
+  }
+  const ch = state.children[no]; const tabs = projectTabs(p, ch);
+  if (!tabs.find(t => t.k === tab)) tab = 'details';
+  const tabLabel = tabs.find(t => t.k === tab).l;
+  const sub = id ? ` › <a href="#/project/${no}/${tab}">${tabLabel}</a> › View` : ` › ${tabLabel}`;
+  const pills = canSeeCost()
+    ? `<div class="pills"><span class="pill">Original Contract Value: ${fmt$(p.origContract)}</span><span class="pill">Current Contract Value: ${fmt$(p.currentContract)}</span><span class="pill">Work Orders Value: ${fmt$(p.woValue)}</span></div>`
+    : `<div class="pills"><span class="badge b-gray">Customer: ${esc(p.customer)}</span><span class="badge" style="background:${STAGE_COLORS[p.stage]}22;color:${STAGE_COLORS[p.stage]}">${p.stage}</span><span class="badge b-gray">PM: ${esc(p.pm)}</span></div>`;
+  const budgetOk = p.estCost <= p.currentContract;
+  $('#view').innerHTML = `
+    <div class="crumb"><span class="chev">›</span> <a href="#/projects/grid">Projects</a> › <a href="#/project/${no}/details">${esc(p.name)}</a>${sub}</div>
+    <div class="proj-head"><div><h1>${p.no} - ${esc(p.name)}</h1>${pills}</div>
+      ${canSeeCost() ? `<span class="budget-ok" style="${budgetOk ? '' : 'background:#fee2e2;color:#991b1b'}">${budgetOk ? 'Budget is up to date' : 'Over budget'}</span>` : ''}</div>
+    <div class="tabs">${tabs.map(t => `<a class="${t.k === tab ? 'active' : ''}" href="#/project/${no}/${t.k}">${t.n !== undefined ? `<span class="cnt">${t.n}</span>` : ''}${t.l}</a>`).join('')}</div>
+    <div id="tabBody"></div>`;
+  const R = { details: renderDetails, workorders: renderWorkOrders, studies: renderStudies, sheets: (p, ch, id) => renderDocs(p, ch, 'sheets', id), shop: (p, ch, id) => renderDocs(p, ch, 'shop', id), files: renderFiles, qc: renderQC, submittals: renderSubmittals, activity: renderActivity };
+  R[tab](p, ch, id);
+}
+const rerender = () => route();
+
+/* ---------- DETAILS ---------- */
+function renderDetails(p, ch) {
+  const hb = sum(p.hoursBudget), hl = sum(p.hoursLogged);
+  const editHours = canManage(); const editRates = isAdmin();
+  const team = state.users.filter(u => u.role !== 'Admin' && u.projects.includes(p.no));
+  const overview = `<div class="card"><h3>Project Overview</h3><div class="kv">
+      <div>Project No.</div><div><b>${p.no}</b></div><div>Name</div><div>${esc(p.name)}</div>
+      <div>Customer</div><div>${esc(p.customer)}</div><div>Architect</div><div>${esc(p.architect)}</div>
+      <div>Location</div><div>${esc(p.location)}</div><div>Stage</div><div>${p.stage}</div>
+      <div>Priority</div><div><span class="prio ${p.priority}">⚑ ${p.priority}</span></div><div>Project Manager</div><div>${esc(p.pm)}</div>
+      <div>Start</div><div>${fmtDate(p.start)}</div><div>Target Completion</div><div>${fmtDate(p.due)}</div>
+      <div>AWI Grade</div><div>${p.awiGrade}</div><div>Primary Finish</div><div>${p.veneer}</div></div></div>`;
+  if (isClient()) {
+    const done = STAGES.indexOf(p.stage);
+    $('#tabBody').innerHTML = `<div class="cards">${overview}<div class="card"><h3>Project Progress</h3>
+      ${STAGES.map((s, i) => `<div class="check"><span>${i < done ? '✅' : i === done ? '🔶' : '⬜'}</span><span>${s}</span></div>`).join('')}
+      <p class="hint">Upload drawings & specs in <a href="#/project/${p.no}/files">Files</a>; review drawings in <a href="#/project/${p.no}/submittals">Submittals</a>.</p></div></div>`;
+    return;
+  }
+  const fin = canSeeCost() ? `<div class="card"><h3>Financial Summary <span class="badge b-green">Admin only</span></h3><div class="kv">
+      <div>Original Contract</div><div>${fmt$(p.origContract)}</div><div>Change Orders</div><div>${fmt$(p.currentContract - p.origContract)}</div>
+      <div>Current Contract</div><div><b>${fmt$(p.currentContract)}</b></div><div>Work Orders Value</div><div>${fmt$(p.woValue)}</div>
+      <div>Billed</div><div>${fmt$(p.billed)} (${fmtPct(p.currentContract ? p.billed / p.currentContract * 100 : 0)})</div>
+      <div>Est. Grand Total Cost</div><div>${fmt$(p.estCost)}</div>
+      <div>Labor Cost to Date</div><div>${fmt$(TRADES.reduce((a, t) => a + p.hoursLogged[t] * state.rates[t], 0))}</div>
+      <div>Projected Margin</div><div><b>${fmtPct(p.currentContract ? (p.currentContract - p.estCost) / p.currentContract * 100 : 0)}</b></div></div></div>`
+    : `<div class="card"><h3>Financial Summary</h3><div class="lock">🔒 Contract values, billing, costs and pay rates are visible to Admin only. Your role (${role()}) sees hours.</div></div>`;
+  const hoursRows = TRADES.map(t => {
+    const b = p.hoursBudget[t], l = p.hoursLogged[t], pct = b ? l / b * 100 : 0;
+    return `<tr><td>${t}</td>
+      <td>${editHours ? `<input type="number" min="0" id="hb_${t}" value="${b}">` : b}</td><td>${l}</td>
+      <td><div class="bar"><span class="${pct > 100 ? 'over' : ''}" style="width:${Math.min(100, pct)}%"></span></div> ${Math.round(pct)}%</td>
+      ${canSeeCost() ? `<td>${editRates ? `$<input type="number" min="0" id="rate_${t}" value="${state.rates[t]}" style="width:60px">` : fmt$(state.rates[t])}/hr</td><td>${fmt$(b * state.rates[t])}</td><td>${fmt$(l * state.rates[t])}</td>` : ''}</tr>`;
+  }).join('');
+  const hours = `<div class="card" style="grid-column:1/-1"><h3>Hours & Pay Plan</h3>
+    <table class="mini"><thead><tr><th>Trade</th><th>Budget hrs</th><th>Logged hrs</th><th>Progress</th>${canSeeCost() ? '<th>Pay rate</th><th>Labor budget</th><th>Labor actual</th>' : ''}</tr></thead>
+    <tbody>${hoursRows}<tr><th>Total</th><th>${hb}</th><th>${hl}</th><th>${hb ? Math.round(hl / hb * 100) : 0}%</th>
+      ${canSeeCost() ? `<th></th><th>${fmt$(TRADES.reduce((a, t) => a + p.hoursBudget[t] * state.rates[t], 0))}</th><th>${fmt$(TRADES.reduce((a, t) => a + p.hoursLogged[t] * state.rates[t], 0))}</th>` : ''}</tr></tbody></table>
+    <div class="actions">${editHours ? `<button class="btn primary small" onclick="saveHoursPlan('${p.no}')">Save plan</button>` : ''}
+      ${canLogHours() ? `<button class="btn ghost small" onclick="openLogHours('${p.no}')">+ Log hours</button>` : ''}</div></div>`;
+  const teamCard = `<div class="card"><h3>Team & Project Access</h3>
+    <p class="hint">People ticked here can open this project (without cost data). Admins see every project.</p>
+    ${state.users.filter(u => u.role !== 'Admin').map(u => `<label class="check"><input type="checkbox" ${u.projects.includes(p.no) ? 'checked' : ''} ${isAdmin() ? '' : 'disabled'} onchange="toggleAccess('${u.id}','${p.no}',this.checked)"> <span><b>${esc(u.name)}</b> — ${u.role}</span></label>`).join('')}
+    ${!isAdmin() ? `<p class="hint">Assigned: ${team.map(u => esc(u.name)).join(', ')}</p>` : ''}</div>`;
+  $('#tabBody').innerHTML = `<div class="cards">${overview}${fin}${hours}${teamCard}</div>`;
+}
+function saveHoursPlan(no) {
+  const p = state.projects.find(x => x.no === no);
+  TRADES.forEach(t => {
+    const hb = document.getElementById('hb_' + t); if (hb) p.hoursBudget[t] = Math.max(0, Number(hb.value) || 0);
+    const r = document.getElementById('rate_' + t); if (r && isAdmin()) state.rates[t] = Math.max(0, Number(r.value) || 0);
+  });
+  log(no, 'Updated hours & pay plan'); save(); toast('Hours plan saved'); rerender();
+}
+function openLogHours(no) {
+  openModal('Log hours', `<div class="form"><label>Trade</label><select id="lhTrade">${TRADES.map(t => `<option>${t}</option>`).join('')}</select>
+    <label>Hours</label><input id="lhHours" type="number" min="0.5" step="0.5" value="4"><label>Note</label><input id="lhNote" placeholder="e.g. Drafted 101.00 elevations"></div>`,
+    `<button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="logHours('${no}')">Log</button>`);
+}
+function logHours(no) {
+  const p = state.projects.find(x => x.no === no); const t = $('#lhTrade').value; const h = Number($('#lhHours').value) || 0;
+  if (h <= 0) return toast('Enter hours');
+  p.hoursLogged[t] += h; log(no, `Logged ${h}h ${t}${$('#lhNote').value ? ' — ' + $('#lhNote').value : ''}`); save(); closeModal(); toast('Hours logged'); rerender();
+}
+function toggleAccess(uidv, no, on) {
+  if (!isAdmin()) return;
+  const u = state.users.find(x => x.id === uidv);
+  u.projects = on ? [...new Set([...u.projects, no])] : u.projects.filter(x => x !== no);
+  log(no, `${on ? 'Granted' : 'Removed'} project access: ${u.name}`); save(); toast(`${u.name} ${on ? 'can now' : 'can no longer'} access ${no}`);
+}
+
+/* ---------- WORK ORDERS ---------- */
+function renderWorkOrders(p, ch) {
+  const rows = ch.workOrders.map(w => {
+    const dwgs = ch.shop.filter(s => s.woId === w.id);
+    return `<tr><td><b>${w.no}</b></td><td>${esc(w.name)}</td>
+      <td>${canManage() ? `<select onchange="setWoStatus('${p.no}','${w.id}',this.value)">${WO_STATUSES.map(s => `<option ${s === w.status ? 'selected' : ''}>${s}</option>`).join('')}</select>` : `<span class="badge b-blue">${w.status}</span>`}</td>
+      <td>${dwgs.map(d => `<a href="#/project/${p.no}/shop/${d.id}">${d.number}</a>`).join(', ') || '—'}</td>
+      <td class="num">${w.budgetHours}</td><td class="num">${w.actualHours}</td><td>${fmtDate(w.shipDate)}</td>
+      ${canSeeCost() ? `<td class="num">${fmt$(w.value)}</td>` : ''}</tr>`;
+  }).join('');
+  $('#tabBody').innerHTML = `${canManage() ? `<div class="actions"><button class="btn orange" onclick="openAddWo('${p.no}')">+ New Work Order</button></div>` : ''}
+    <div class="table-wrap"><table class="grid"><thead><tr><th>Work Order</th><th>Name</th><th>Status</th><th>Linked Shop Drawings</th><th class="num">Budget hrs</th><th class="num">Actual hrs</th><th>Ship Date</th>${canSeeCost() ? '<th class="num">Value</th>' : ''}</tr></thead>
+    <tbody>${rows}</tbody>${canSeeCost() ? `<tfoot><tr><td colspan="7">Total</td><td class="num">${fmt$(ch.workOrders.reduce((a, w) => a + w.value, 0))}</td></tr></tfoot>` : ''}</table></div>
+    <p class="hint">A Work Order is released to the shop only after its linked shop drawings are approved through QC and Submittals.</p>`;
+}
+function setWoStatus(no, id, s) { const w = state.children[no].workOrders.find(x => x.id === id); log(no, `${w.no} status: ${w.status} → ${s}`); w.status = s; save(); toast('Work order updated'); }
+function openAddWo(no, fromStudy) {
+  const st = fromStudy ? state.children[no].studies.find(s => s.id === fromStudy) : null;
+  openModal('New Work Order', `<div class="form"><label>Name</label><input id="woName" value="${st ? esc(st.title.replace(/ study$/i, '')) : ''}">
+    <div class="row"><div><label>Budget hours</label><input id="woHours" type="number" value="120"></div><div><label>Ship date</label><input id="woShip" type="date" value="${isoAdd(todayIso(), 45)}"></div></div>
+    ${canSeeCost() ? '<label>Value ($)</label><input id="woValue" type="number" value="25000">' : ''}</div>`,
+    `<button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="addWo('${no}','${fromStudy || ''}')">Create</button>`);
+}
+function addWo(no, fromStudy) {
+  const ch = state.children[no]; const name = $('#woName').value.trim(); if (!name) return toast('Name required');
+  const w = { id: uid(), no: `${no}-${String(11 + ch.workOrders.length * 7).padStart(3, '0')}p`, name, status: 'Draft', value: canSeeCost() ? Number($('#woValue').value) || 0 : 0, budgetHours: Number($('#woHours').value) || 0, actualHours: 0, shipDate: $('#woShip').value };
+  ch.workOrders.push(w);
+  if (fromStudy) { const s = ch.studies.find(x => x.id === fromStudy); s.convertedWo = w.no; s.status = 'Converted'; }
+  log(no, `Created Work Order ${w.no} — ${name}`); save(); closeModal(); toast('Work order created');
+  location.hash = `#/project/${no}/workorders`; rerender();
+}
+
+/* ---------- STUDY PROJECTS ---------- */
+function renderStudies(p, ch) {
+  $('#tabBody').innerHTML = `${canEditDocs() ? `<div class="actions"><button class="btn orange" onclick="openAddStudy('${p.no}')">+ New Study</button></div>` : ''}
+    <div class="table-wrap"><table class="grid"><thead><tr><th>Study</th><th>Title</th><th>Engineer</th><th>Status</th><th class="num">Budget hrs</th><th class="num">Logged hrs</th><th>Work Order</th><th></th></tr></thead><tbody>
+    ${ch.studies.map(s => `<tr><td><b>${s.no}</b></td><td>${esc(s.title)}</td><td>${esc(s.engineer)}</td><td><span class="badge ${s.status === 'Converted' ? 'b-green' : s.status === 'Complete' ? 'b-blue' : 'b-amber'}">${s.status}</span></td>
+      <td class="num">${s.budgetHours}</td><td class="num">${s.loggedHours}</td><td>${s.convertedWo || '—'}</td>
+      <td>${!s.convertedWo && canManage() ? `<button class="btn small primary" onclick="openAddWo('${p.no}','${s.id}')">Convert to Work Order</button>` : ''}</td></tr>`).join('')}
+    </tbody></table></div><p class="hint">Study Projects hold pre-production engineering research (feasibility, mockups, value engineering). Once proven, convert them into a Work Order.</p>`;
+}
+function openAddStudy(no) {
+  openModal('New Study Project', `<div class="form"><label>Title</label><input id="stTitle" placeholder="e.g. Acoustic wood ceiling mockup study">
+    <div class="row"><div><label>Engineer</label><input id="stEng" value="${esc(me().name)}"></div><div><label>Budget hours</label><input id="stHours" type="number" value="16"></div></div></div>`,
+    `<button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn primary" onclick="addStudy('${no}')">Create</button>`);
+}
+function addStudy(no) {
+  const ch = state.children[no]; const title = $('#stTitle').value.trim(); if (!title) return toast('Title required');
+  ch.studies.push({ id: uid(), no: 'ST-' + String(ch.studies.length + 1).padStart(2, '0'), title, engineer: $('#stEng').value, status: 'In Progress', budgetHours: Number($('#stHours').value) || 0, loggedHours: 0, convertedWo: '' });
+  log(no, `Created study: ${title}`); save(); closeModal(); rerender();
+}
+
+/* ---------- ACTIVITY ---------- */
+function renderActivity(p, ch) {
+  $('#tabBody').innerHTML = `<div class="panel activity">${ch.activity.map(a => `<div><div class="t">${a.t} · ${esc(a.user)}</div>${esc(a.text)}</div>`).join('') || 'No activity yet.'}</div>`;
+}
+
+
+
+'use strict';
+/* =====================================================================
+   QuadeConnect PM — app.js
+   Completes the remaining interactive modules:
+   1. renderDocs: Sheets & Shop Drawings Grid, Multi-Slide PDF Viewer,
+      Revision History, Version Sets, Mockup Packages, Publish Log.
+   2. renderFiles: AWS S3 / Box Cloud Explorer, Categories, Direct Upload.
+   3. renderQC: Internal Quality Control Queue, Checklists, PDF Redlines.
+   4. renderSubmittals: Submittal Packages, Transmittals, Ball-in-Court.
+   ===================================================================== */
+
+/* ---------- SHEETS & SHOP DRAWINGS (DOCS) ---------- */
+function renderDocs(p, ch, type, docId) {
+  const isShop = type === 'shop';
+  const list = isShop ? ch.shop : ch.sheets;
+  const filtered = isClient() ? list.filter(d => d.published) : list;
+
+  if (docId) {
+    const docItem = list.find(d => d.id === docId);
+    if (!docItem) {
+      $('#tabBody').innerHTML = `<div class="denied">Document not found. <a href="#/project/${p.no}/${type}">Back to ${isShop ? 'Shop Drawings' : 'Sheets'}</a></div>`;
+      return;
+    }
+    return renderDocViewer(p, ch, type, docItem);
+  }
+
+  // Grid of Documents
+  const pendingPublish = list.filter(d => !d.published).length;
+  const actions = `
+    <div class="actions">
+      ${canEditDocs() ? `<button class="btn orange" onclick="openUploadDoc('${p.no}','${type}')">☁ Upload & Process New ${isShop ? 'Shop Drawings' : 'Sheets'}</button>` : ''}
+      ${canEditDocs() ? `<button class="btn ghost" onclick="openManageVersions('${p.no}','${type}')">Manage Versions</button>` : ''}
+      ${canManage() ? `<button class="btn ghost" onclick="openPublishLog('${p.no}','${type}')">Publish Log (${pendingPublish}/${list.length})</button>` : ''}
+    </div>`;
+
+  const rows = filtered.map(d => {
+    const curVer = d.versions[d.current] || d.versions[0];
+    const wo = isShop && d.woId ? ch.workOrders.find(w => w.id === d.woId) : null;
+    return `
+      <tr>
+        <td><b><a href="#/project/${p.no}/${type}/${d.id}">${esc(d.number)}</a></b></td>
+        <td><a href="#/project/${p.no}/${type}/${d.id}">${esc(d.name)}</a></td>
+        <td><span class="badge b-blue">${esc(curVer.name)}</span></td>
+        <td>${fmtDate(curVer.issue)}</td>
+        ${isShop ? `<td>${wo ? `<a href="#/project/${p.no}/workorders">${esc(wo.no)}</a>` : '—'}</td>` : ''}
+        <td>
+          <span class="sigma" title="${curVer.pages} Slides/Pages in PDF">Σ${curVer.pages}</span>
+          ${d.markups ? '<span title="Pinned Markups">📌</span>' : ''}
+          ${d.versions.length > 1 ? `<span class="revs">${d.versions.length} Revs</span>` : ''}
+        </td>
+        <td>${esc(curVer.uploaded)}</td>
+        <td>${esc(curVer.by)}</td>
+        ${isShop ? `<td><span class="badge ${d.qcStatus === 'QC Approved' ? 'b-green' : d.qcStatus === 'Rejected' ? 'b-red' : 'b-amber'}">${esc(d.qcStatus || 'Pending')}</span></td>` : ''}
+        <td><span class="badge ${d.published ? 'b-green' : 'b-gray'}">${d.published ? 'Published' : 'Draft'}</span></td>
+      </tr>`;
+  }).join('');
+
+  $('#tabBody').innerHTML = `
+    ${actions}
+    <div class="table-wrap">
+      <table class="grid">
+        <thead>
+          <tr>
+            <th>${isShop ? 'Shop Drawing Number' : 'Sheet Number'}</th>
+            <th>${isShop ? 'Shop Drawing Name' : 'Sheet Name'}</th>
+            <th>Version</th>
+            <th>Issue Date</th>
+            ${isShop ? '<th>Work Orders</th>' : ''}
+            <th>${isShop ? 'Shop Drawing Info' : 'Sheet Info'}</th>
+            <th>Upload Date</th>
+            <th>Uploaded By</th>
+            ${isShop ? '<th>QC Status</th>' : ''}
+            <th>Publish Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows || `<tr><td colspan="${isShop ? 10 : 8}" style="text-align:center;padding:20px;color:#6b7280">No ${isShop ? 'shop drawings' : 'sheets'} available.</td></tr>`}
+        </tbody>
+      </table>
+    </div>
+    <p class="hint">Click any number or name to open the split-pane Multi-Slide PDF Viewer with full revision history, slide navigation, and markup tools.</p>`;
+}
+
+/* ---------- SINGLE DOCUMENT SPLIT-PANE VIEWER ---------- */
+function renderDocViewer(p, ch, type, item) {
+  const isShop = type === 'shop';
+  const verIdx = ui.viewVer !== undefined && ui.viewVer < item.versions.length ? ui.viewVer : item.current;
+  const ver = item.versions[verIdx] || item.versions[0];
+  const totalSlides = ver.pages || 1;
+  const curSlide = Math.min(ui.slide || 0, totalSlides - 1);
+
+  // SVG Mock Architectural / Millwork Slide
+  const svgSlide = generateSlideSVG(item, ver, curSlide, totalSlides, isShop);
+
+  $('#tabBody').innerHTML = `
+    <div class="actions">
+      <a class="btn ghost small" href="#/project/${p.no}/${type}">‹ Back to ${isShop ? 'Shop Drawings' : 'Sheets'} Grid</a>
+      <span class="spacer"></span>
+      <button class="btn small ${ui.compare ? 'orange' : 'ghost'}" onclick="toggleCompare('${p.no}','${type}','${item.id}')">
+        ${ui.compare ? 'Exit Comparison' : '⇄ Compare Revisions'}
+      </button>
+      <button class="btn small ghost" onclick="downloadCurrentDoc('${item.number}','${ver.name}')">⤓ Download PDF</button>
+    </div>
+
+    <div class="docview">
+      <!-- Left Panel: Metadata & Revision History -->
+      <div class="docmeta panel">
+        <label>${isShop ? 'Shop Drawing Number *' : 'Sheet Number *'}</label>
+        <input id="dmNumber" value="${esc(item.number)}" ${canEditDocs() ? '' : 'disabled'}>
+
+        <label>${isShop ? 'Shop Drawing Name' : 'Sheet Name'}</label>
+        <input id="dmName" value="${esc(item.name)}" ${canEditDocs() ? '' : 'disabled'}>
+
+        <label>Version Set *</label>
+        <select id="dmVersion" onchange="changeDocVersion('${p.no}','${type}','${item.id}',this.value)">
+          ${item.versions.map((v, i) => `<option value="${i}" ${i === verIdx ? 'selected' : ''}>${esc(v.name)} (${fmtDate(v.issue)})</option>`).join('')}
+        </select>
+
+        ${isShop ? `
+          <label>Linked Work Order</label>
+          <select id="dmWo" ${canEditDocs() ? '' : 'disabled'}>
+            <option value="">— None —</option>
+            ${ch.workOrders.map(w => `<option value="${w.id}" ${w.id === item.woId ? 'selected' : ''}>${w.no} - ${esc(w.name)}</option>`).join('')}
+          </select>
+        ` : ''}
+
+        <label>Tags</label>
+        <input id="dmTags" value="${esc((item.tags || []).join(', '))}" ${canEditDocs() ? '' : 'disabled'}>
+
+        ${canEditDocs() ? `<button class="btn primary small" style="margin-top:10px" onclick="saveDocMetadata('${p.no}','${type}','${item.id}')">Save Changes</button>` : ''}
+
+        <!-- Bottom-Left Revision History Timeline -->
+        <div class="revlist">
+          <h4>Revision History</h4>
+          ${item.versions.map((v, i) => `
+            <div class="rev ${i === verIdx ? 'viewing' : ''}" onclick="changeDocVersion('${p.no}','${type}','${item.id}',${i})">
+              <div class="rname">${esc(v.name)} ${i === verIdx ? '<span style="color:#ea580c;font-size:10px">(now viewing)</span>' : ''}</div>
+              <div class="rsub">Issued: ${fmtDate(v.issue)} · ${v.pages} slides · by ${esc(v.by)}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Right Panel: PDF Viewer Canvas & Carousel -->
+      <div class="viewer">
+        <div class="vtop">
+          <b>${esc(item.number)} - ${esc(item.name)}</b>
+          <span class="badge b-blue">${esc(ver.name)}</span>
+          <span class="sigma">Slide ${curSlide + 1} of ${totalSlides}</span>
+          <span class="spacer"></span>
+          <button class="btn ghost small" onclick="zoomDoc(-0.2)">−</button>
+          <span>${Math.round((ui.zoom || 1) * 100)}%</span>
+          <button class="btn ghost small" onclick="zoomDoc(0.2)">+</button>
+          <button class="btn ghost small" onclick="openAddMarkupModal('${p.no}','${type}','${item.id}')">✎ Add Markup / Pin</button>
+        </div>
+
+        ${ui.compare ? renderCompareSplit(item, verIdx) : `
+          <div class="vmain">
+            <button class="vnav" onclick="navSlide(-1,${totalSlides})" ${curSlide === 0 ? 'disabled' : ''}>‹</button>
+            <div class="vstage" id="pdfStage">
+              <div style="transform:scale(${ui.zoom || 1});transition:transform .15s ease">
+                ${svgSlide}
+              </div>
+            </div>
+            <button class="vnav" onclick="navSlide(1,${totalSlides})" ${curSlide >= totalSlides - 1 ? 'disabled' : ''}>›</button>
+          </div>
+          <!-- Thumbnail Strip Carousel -->
+          <div class="thumbs">
+            ${Array.from({ length: totalSlides }, (_, idx) => `
+              <div class="th ${idx === curSlide ? 'active' : ''}" onclick="jumpSlide(${idx})">
+                <div class="pg">Slide ${idx + 1}</div>
+                <div>${idx === 0 ? 'Cover/Plan' : 'Detail ' + idx}</div>
+              </div>`).join('')}
+          </div>
+        `}
+      </div>
+    </div>`;
+}
+
+function generateSlideSVG(item, ver, slideIdx, total, isShop) {
+  const w = 680, h = 480;
+  return `
+    <svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="cad-svg-canvas" style="background:var(--surface,#070d18);border:1px solid var(--blue,#00f5ff);box-shadow:var(--accent-glow, 0 0 20px rgba(0,245,255,0.35));border-radius:6px">
+      <!-- Outer Border & Title Block Grid -->
+      <rect x="15" y="15" width="${w-30}" height="${h-30}" fill="var(--surface-alt,#0c172a)" stroke="var(--blue,#00f5ff)" stroke-width="1.8"/>
+      <rect x="${w-220}" y="${h-110}" width="205" height="95" fill="var(--surface,#070d18)" stroke="var(--blue,#00f5ff)" stroke-width="1.2"/>
+      
+      <!-- Architectural Title Block Details -->
+      <text x="${w-210}" y="${h-90}" font-family="Segoe UI, sans-serif" font-size="11" font-weight="bold" fill="var(--blue,#00f5ff)">QUADECONNECT MILLWORK</text>
+      <text x="${w-210}" y="${h-75}" font-family="Segoe UI, sans-serif" font-size="8.5" fill="var(--text-muted,#7dd3fc)">PROJECT: ${esc(item.name)}</text>
+      <text x="${w-210}" y="${h-60}" font-family="Segoe UI, sans-serif" font-size="8.5" fill="var(--text-muted,#7dd3fc)">SHEET NO: <tspan font-weight="bold" fill="var(--blue,#00f5ff)">${esc(item.number)}</tspan></text>
+      <text x="${w-210}" y="${h-45}" font-family="Segoe UI, sans-serif" font-size="8.5" fill="var(--text-muted,#7dd3fc)">VERSION: ${esc(ver.name)}</text>
+      <text x="${w-210}" y="${h-30}" font-family="Segoe UI, sans-serif" font-size="8" fill="var(--text-muted,#7dd3fc)">ISSUE: ${fmtDate(ver.issue)} | SLIDE ${slideIdx + 1}/${total}</text>
+
+      <!-- Architectural Drawing Mock Graphic -->
+      <g stroke="var(--blue,#00f5ff)" stroke-width="1.2" fill="none">
+        ${isShop ? `
+          <!-- Millwork Casework Section & Joinery Mockup -->
+          <rect x="45" y="60" width="220" height="240" fill="var(--surface,#070d18)" stroke="var(--blue,#00f5ff)" stroke-width="1.5"/>
+          <line x1="45" y1="120" x2="265" y2="120" stroke-dasharray="4" stroke="var(--text-muted,#7dd3fc)"/>
+          <line x1="45" y1="180" x2="265" y2="180" stroke="var(--text-muted,#7dd3fc)"/>
+          <line x1="155" y1="60" x2="155" y2="300" stroke="var(--text-muted,#7dd3fc)"/>
+          <!-- Countertop Detail -->
+          <rect x="40" y="50" width="230" height="15" fill="var(--surface-alt,#0c172a)" stroke="var(--blue,#00f5ff)" stroke-width="1.5"/>
+          <text x="60" y="42" font-family="monospace" font-size="9" fill="var(--blue,#00f5ff)">SOLID SURFACE COUNTERTOP (3/4" THK)</text>
+          
+          <!-- Elevation & Hardware Annotations -->
+          <circle cx="100" cy="90" r="4" fill="var(--blue,#00f5ff)"/>
+          <circle cx="210" cy="90" r="4" fill="var(--blue,#00f5ff)"/>
+          <text x="100" y="240" font-family="monospace" font-size="9" fill="var(--text-muted,#7dd3fc)">BLUM SOFT-CLOSE HINGES (PAIR)</text>
+          
+          <!-- Detail View callout on slide 2+ -->
+          ${slideIdx > 0 ? `
+            <rect x="310" y="60" width="280" height="260" fill="var(--surface-alt,#0c172a)" stroke="var(--orange,#ff007f)" stroke-width="1.5"/>
+            <text x="325" y="85" font-family="Segoe UI" font-weight="bold" font-size="11" fill="var(--orange,#ff007f)">ENLARGED JOINERY SECTION (SLIDE ${slideIdx + 1})</text>
+            <path d="M 330 110 L 450 110 L 450 200 L 410 200 L 410 240 L 330 240 Z" fill="rgba(255,0,127,0.15)" stroke="var(--orange,#ff007f)" stroke-width="1.5"/>
+            <text x="340" y="160" font-family="monospace" font-size="8.5" fill="var(--orange,#ff007f)">3/4" VENEER CORE PLYWOOD</text>
+          ` : `
+            <!-- Floor Plan Layout -->
+            <rect x="310" y="60" width="280" height="240" fill="var(--surface,#070d18)" stroke="var(--border,#132742)"/>
+            <text x="330" y="85" font-family="Segoe UI" font-size="10" font-weight="bold" fill="var(--text-muted,#7dd3fc)">PLAN VIEW - RECEPTION / RESTROOM</text>
+            <circle cx="450" cy="180" r="45" fill="none" stroke="var(--blue,#00f5ff)" stroke-dasharray="3"/>
+          `}
+        ` : `
+          <!-- Master Architectural Plan Sheet (G0.00 / G0.02) -->
+          <rect x="40" y="50" width="360" height="360" fill="var(--surface,#070d18)" stroke="var(--blue,#00f5ff)"/>
+          <line x1="40" y1="170" x2="400" y2="170" stroke="var(--border,#132742)"/>
+          <line x1="220" y1="50" x2="220" y2="410" stroke="var(--border,#132742)"/>
+          <text x="60" y="80" font-family="Segoe UI" font-size="11" font-weight="bold" fill="var(--blue,#00f5ff)">ARCHITECTURAL CODE &amp; LIFE SAFETY</text>
+          <text x="60" y="105" font-family="monospace" font-size="8.5" fill="var(--text-muted,#7dd3fc)">AWI PREMIUM GRADE SPECIFICATION 06 41 00</text>
+          <text x="60" y="125" font-family="monospace" font-size="8.5" fill="var(--text-muted,#7dd3fc)">FIRE RATING: CLASS A FLAME SPREAD RATED</text>
+          <rect x="430" y="50" width="180" height="240" fill="var(--surface-alt,#0c172a)" stroke="var(--blue,#00f5ff)"/>
+          <text x="445" y="75" font-family="Segoe UI" font-size="9.5" font-weight="bold" fill="var(--blue,#00f5ff)">GENERAL NOTES</text>
+          <text x="445" y="95" font-family="Segoe UI" font-size="8" fill="var(--text-muted,#7dd3fc)">1. VERIFY ALL DIMENSIONS ON SITE</text>
+          <text x="445" y="115" font-family="Segoe UI" font-size="8" fill="var(--text-muted,#7dd3fc)">2. COORDINATE MEP BLOCKING</text>
+        `}
+      </g>
+    </svg>`;
+}
+
+function renderCompareSplit(item, curVerIdx) {
+  const prevVerIdx = curVerIdx > 0 ? curVerIdx - 1 : Math.min(1, item.versions.length - 1);
+  const curVer = item.versions[curVerIdx];
+  const prevVer = item.versions[prevVerIdx];
+  return `
+    <div class="vcompare">
+      <div>
+        <div class="cap" style="color:#b91c1c">Previous: ${esc(prevVer.name)} (${fmtDate(prevVer.issue)})</div>
+        <div class="vstage">${generateSlideSVG(item, prevVer, 0, prevVer.pages, true)}</div>
+      </div>
+      <div>
+        <div class="cap" style="color:#15803d">Current: ${esc(curVer.name)} (${fmtDate(curVer.issue)})</div>
+        <div class="vstage">${generateSlideSVG(item, curVer, 0, curVer.pages, true)}</div>
+      </div>
+    </div>`;
+}
+
+function toggleCompare(no, type, id) {
+  ui.compare = !ui.compare;
+  renderProject(no, type, id);
+}
+function changeDocVersion(no, type, id, vIdx) {
+  ui.viewVer = Number(vIdx);
+  ui.slide = 0;
+  renderProject(no, type, id);
+}
+function navSlide(delta, total) {
+  ui.slide = Math.max(0, Math.min(total - 1, (ui.slide || 0) + delta));
+  const curHash = location.hash.split('/');
+  renderProject(curHash[2], curHash[3], curHash[4]);
+}
+function jumpSlide(idx) {
+  ui.slide = idx;
+  const curHash = location.hash.split('/');
+  renderProject(curHash[2], curHash[3], curHash[4]);
+}
+function zoomDoc(delta) {
+  ui.zoom = Math.max(0.6, Math.min(2.0, (ui.zoom || 1) + delta));
+  const st = document.querySelector('#pdfStage > div');
+  if (st) st.style.transform = `scale(${ui.zoom})`;
+}
+function downloadCurrentDoc(num, verName) {
+  toast(`Streaming pre-signed PDF from AWS S3 / Box for ${num} (${verName})…`);
+}
+function saveDocMetadata(no, type, id) {
+  const list = type === 'shop' ? state.children[no].shop : state.children[no].sheets;
+  const item = list.find(d => d.id === id);
+  item.number = $('#dmNumber').value.trim();
+  item.name = $('#dmName').value.trim();
+  if (type === 'shop' && $('#dmWo')) item.woId = $('#dmWo').value;
+  item.tags = $('#dmTags').value.split(',').map(s => s.trim()).filter(Boolean);
+  log(no, `Updated metadata for ${item.number} - ${item.name}`);
+  save();
+  toast('Document metadata saved');
+  renderProject(no, type, id);
+}
+
+/* ---------- UPLOAD DIALOGS (S3/BOX DIRECT STREAM) ---------- */
+function openUploadDoc(no, type) {
+  const isShop = type === 'shop';
+  openModal(
+    `Upload & Process New ${isShop ? 'Shop Drawings' : 'Sheets'}`,
+    `<div class="form">
+      <div class="callout" style="margin-top:0">
+        <b>AWS S3 / Box Cloud Engine:</b> When you select a PDF, the file uploads directly via secure pre-signed URL.
+        The automated worker extracts <b>total slide count (ΣN)</b>, renders per-slide thumbnails, and scans title blocks.
+      </div>
+      <label>Select PDF File(s)</label>
+      <input type="file" id="docFileInput" accept=".pdf,.dwg,.dxf" onchange="previewUploadInfo(this)">
+      <div id="uploadPreviewInfo" style="margin-top:8px;font-size:12px;color:#1e40af"></div>
+
+      <div class="row" style="margin-top:10px">
+        <div>
+          <label>${isShop ? 'Drawing Number' : 'Sheet Number'}</label>
+          <input id="upDocNumber" placeholder="${isShop ? 'e.g. 101.03' : 'e.g. G0.25'}">
+        </div>
+        <div>
+          <label>${isShop ? 'Drawing Name' : 'Sheet Name'}</label>
+          <input id="upDocName" placeholder="${isShop ? 'e.g. RESTROOM MOCKUP HARDWARE' : 'e.g. WALL SECTIONS'}">
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Version Set Name</label>
+          <input id="upDocVersion" value="${isShop ? 'MOCKUP PACKAGE # 1' : '90 IFP'}">
+        </div>
+        <div>
+          <label>Estimated Slides/Pages Count</label>
+          <input type="number" id="upDocPages" value="3" min="1">
+        </div>
+      </div>
+
+      ${isShop ? `
+        <label>Link to Work Order</label>
+        <select id="upDocWo">
+          <option value="">— None —</option>
+          ${state.children[no].workOrders.map(w => `<option value="${w.id}">${w.no} - ${esc(w.name)}</option>`).join('')}
+        </select>
+      ` : ''}
+    </div>`,
+    `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+     <button class="btn primary" onclick="submitDocUpload('${no}','${type}')">Start Upload &amp; Process</button>`
+  );
+}
+
+function previewUploadInfo(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  const info = $('#uploadPreviewInfo');
+  info.innerHTML = `Selected: <b>${esc(file.name)}</b> (${(file.size / 1024 / 1024).toFixed(2)} MB). Analyzing slides…`;
+  // If PDF.js is available, count exact pages in real time!
+  if (window.pdfjsLib && file.type === 'application/pdf') {
+    const fileReader = new FileReader();
+    fileReader.onload = function() {
+      const typedarray = new Uint8Array(this.result);
+      pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
+        $('#upDocPages').value = pdf.numPages;
+        info.innerHTML = `Selected: <b>${esc(file.name)}</b> — Detected <b>${pdf.numPages} slides/pages</b> via PDF engine.`;
+      });
+    };
+    fileReader.readAsArrayBuffer(file);
+  }
+}
+
+function submitDocUpload(no, type) {
+  const isShop = type === 'shop';
+  const num = $('#upDocNumber').value.trim();
+  const name = $('#upDocName').value.trim();
+  const verName = $('#upDocVersion').value.trim() || 'Rev 0';
+  const pages = Number($('#upDocPages').value) || 1;
+  const woId = isShop && $('#upDocWo') ? $('#upDocWo').value : null;
+
+  if (!num || !name) return toast('Number and name are required.');
+
+  const list = isShop ? state.children[no].shop : state.children[no].sheets;
+  let existing = list.find(d => d.number.toLowerCase() === num.toLowerCase());
+
+  if (existing) {
+    // Add new version to existing document
+    existing.versions.push({
+      id: uid(),
+      name: verName,
+      issue: todayIso(),
+      pages: pages,
+      by: me().name,
+      uploaded: nowStr()
+    });
+    existing.current = existing.versions.length - 1;
+    existing.name = name;
+    if (woId) existing.woId = woId;
+    log(no, `Uploaded new version ${verName} for ${num} (${pages} slides)`);
+  } else {
+    // Create new document
+    const newDoc = {
+      id: uid(),
+      number: num,
+      name: name,
+      woId: woId,
+      versions: [{
+        id: uid(),
+        name: verName,
+        issue: todayIso(),
+        pages: pages,
+        by: me().name,
+        uploaded: nowStr()
+      }],
+      current: 0,
+      tags: ['New Intake'],
+      published: false,
+      qcStatus: isShop ? 'Pending QC' : undefined,
+      markups: false
+    };
+    list.unshift(newDoc);
+    log(no, `Uploaded & processed new ${isShop ? 'Shop Drawing' : 'Sheet'} ${num} - ${name} (${pages} slides)`);
+  }
+
+  save();
+  closeModal();
+  toast(`${num} successfully processed & stored in S3/Box`);
+  renderProject(no, type);
+}
+
+function openPublishLog(no, type) {
+  const list = type === 'shop' ? state.children[no].shop : state.children[no].sheets;
+  const unpublished = list.filter(d => !d.published);
+
+  openModal(
+    `Publish Log (${unpublished.length} Pending Release)`,
+    `<div>
+      <p class="hint">Select drawings/sheets to release to the Client Workspace and Field Installers:</p>
+      ${unpublished.length === 0 ? '<p>All items are already published.</p>' : `
+        <table class="mini">
+          <thead><tr><th><input type="checkbox" onchange="toggleAllPublish(this)"></th><th>Number</th><th>Name</th><th>Version</th></tr></thead>
+          <tbody>
+            ${unpublished.map(d => `
+              <tr>
+                <td><input type="checkbox" class="pubCheck" value="${d.id}"></td>
+                <td><b>${d.number}</b></td>
+                <td>${esc(d.name)}</td>
+                <td>${esc(d.versions[d.current].name)}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      `}
+    </div>`,
+    `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+     <button class="btn green" onclick="commitPublish('${no}','${type}')" ${unpublished.length === 0 ? 'disabled' : ''}>Publish Selected to Client</button>`
+  );
+}
+
+function toggleAllPublish(master) {
+  document.querySelectorAll('.pubCheck').forEach(cb => cb.checked = master.checked);
+}
+function commitPublish(no, type) {
+  const checkedIds = Array.from(document.querySelectorAll('.pubCheck:checked')).map(cb => cb.value);
+  if (!checkedIds.length) return toast('Select at least one item.');
+  const list = type === 'shop' ? state.children[no].shop : state.children[no].sheets;
+  list.forEach(d => { if (checkedIds.includes(d.id)) d.published = true; });
+  log(no, `Published ${checkedIds.length} ${type} item(s) to Client Portal`);
+  save();
+  closeModal();
+  toast(`${checkedIds.length} items published successfully`);
+  renderProject(no, type);
+}
+
+function openManageVersions(no, type) {
+  const list = type === 'shop' ? state.children[no].shop : state.children[no].sheets;
+  openModal(
+    'Manage Version Sets',
+    `<div class="form">
+      <p class="hint">Active Version Sets across ${type}:</p>
+      <ul style="padding-left:18px">
+        ${Array.from(new Set(list.flatMap(d => d.versions.map(v => v.name)))).map(v => `<li><b>${esc(v)}</b></li>`).join('')}
+      </ul>
+      <label>Create New Batch Version Set</label>
+      <input id="newBatchVer" placeholder="e.g. Bulletin 02 or Mockup Package # 6">
+    </div>`,
+    `<button class="btn ghost" onclick="closeModal()">Close</button>
+     <button class="btn primary" onclick="toast('Batch version set created');closeModal();">Save</button>`
+  );
+}
+
+function openAddMarkupModal(no, type, id) {
+  openModal(
+    'Add PDF Markup / Pinned Comment',
+    `<div class="form">
+      <label>Comment / Redline Instruction</label>
+      <textarea id="mkText" rows="3" placeholder="e.g. Check field dimensions with GC; clarify laminate finish match."></textarea>
+      <label>Pin Category</label>
+      <select id="mkType">
+        <option>Architectural Question (RFI)</option>
+        <option>QC Non-Conformance</option>
+        <option>Field Verification Required</option>
+        <option>Finish / Hardware Coordination</option>
+      </select>
+    </div>`,
+    `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+     <button class="btn orange" onclick="saveMarkupPin('${no}','${type}','${id}')">Place Pin &amp; Notify</button>`
+  );
+}
+function saveMarkupPin(no, type, id) {
+  const list = type === 'shop' ? state.children[no].shop : state.children[no].sheets;
+  const item = list.find(d => d.id === id);
+  item.markups = true;
+  log(no, `Added markup pin to ${item.number}: ${$('#mkText').value}`);
+  save();
+  closeModal();
+  toast('Markup annotation pinned to slide.');
+  renderProject(no, type, id);
+}
+
+/* ---------- FILES (AWS S3 / BOX EXPLORER) ---------- */
+function renderFiles(p, ch) {
+  const activeCat = ui.fileCat || 'All';
+  const allowedCats = isClient() ? CLIENT_FILE_CATS : FILE_CATS;
+  const files = ch.files.filter(f => (activeCat === 'All' || f.cat === activeCat) && (!isClient() || CLIENT_FILE_CATS.includes(f.cat)));
+
+  $('#tabBody').innerHTML = `
+    <div class="actions">
+      <button class="btn orange" onclick="openUploadFile('${p.no}')">☁ Upload to AWS S3 / Box</button>
+      <span class="spacer"></span>
+      <span class="hint">Connected Storage: AWS S3 Bucket (us-east-1) · Box Enterprise Sync Active</span>
+    </div>
+
+    <div class="files">
+      <!-- Folder Directory -->
+      <div class="folders panel">
+        <h4 style="margin:0 0 10px;font-size:12px;color:#475569">FOLDERS</h4>
+        <a class="${activeCat === 'All' ? 'active' : ''}" onclick="ui.fileCat='All';renderFiles(state.projects.find(x=>x.no==='${p.no}'),state.children['${p.no}'])">
+          📁 All Files <span>${ch.files.length}</span>
+        </a>
+        ${allowedCats.map(c => `
+          <a class="${activeCat === c ? 'active' : ''}" onclick="ui.fileCat='${c}';renderFiles(state.projects.find(x=>x.no==='${p.no}'),state.children['${p.no}'])">
+            📁 ${c} <span>${ch.files.filter(f => f.cat === c).length}</span>
+          </a>`).join('')}
+      </div>
+
+      <!-- File Grid -->
+      <div class="table-wrap">
+        <table class="grid">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Category</th>
+              <th>Size</th>
+              <th>Uploaded By</th>
+              <th>Date</th>
+              <th>S3 / Box URI</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${files.map(f => `
+              <tr>
+                <td><b>${esc(f.name)}</b></td>
+                <td><span class="badge b-gray">${esc(f.cat)}</span></td>
+                <td>${esc(f.size)}</td>
+                <td>${esc(f.by)}</td>
+                <td>${esc(f.date)}</td>
+                <td><span class="key">${esc(f.key)}</span></td>
+                <td>
+                  <button class="btn ghost small" onclick="openFilePreview('${esc(f.name)}')">View</button>
+                </td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+function openUploadFile(no) {
+  openModal(
+    'Upload File to AWS S3 / Box',
+    `<div class="form">
+      <label>Select File</label>
+      <input type="file" id="fUploadInput">
+      <label>Folder / Category</label>
+      <select id="fUploadCat">
+        ${(isClient() ? CLIENT_FILE_CATS : FILE_CATS).map(c => `<option>${c}</option>`).join('')}
+      </select>
+    </div>`,
+    `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+     <button class="btn primary" onclick="submitFileUpload('${no}')">Upload to Cloud</button>`
+  );
+}
+function submitFileUpload(no) {
+  const fin = $('#fUploadInput');
+  const file = fin.files && fin.files[0];
+  const cat = $('#fUploadCat').value;
+  const name = file ? file.name : 'Client_Uploaded_Document.pdf';
+  const size = file ? (file.size / 1024 > 1024 ? (file.size / 1024 / 1024).toFixed(1) + ' MB' : Math.round(file.size / 1024) + ' KB') : '1.5 MB';
+
+  state.children[no].files.unshift({
+    id: uid(),
+    name: name,
+    cat: cat,
+    size: size,
+    by: me().name,
+    date: fmtDate(todayIso()),
+    key: `s3://quadeconnect-prod/projects/${no}/files/${slug(cat)}/${name}`
+  });
+  log(no, `Uploaded file to S3/Box: ${name} [${cat}]`);
+  save();
+  closeModal();
+  toast('File uploaded to AWS S3 / Box');
+  renderProject(no, 'files');
+}
+
+function openFilePreview(name) {
+  openModal(
+    `Preview: ${name}`,
+    `<div style="text-align:center;padding:30px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px">
+      <h3>Viewing via Secure Pre-Signed URL</h3>
+      <p style="color:#475569;font-size:12px">Document: <b>${esc(name)}</b></p>
+      <p class="hint">In production, AWS S3 / Box streams this PDF or image straight into the browser canvas.</p>
+    </div>`,
+    '<button class="btn ghost" onclick="closeModal()">Close</button>'
+  );
+}
+
+/* ---------- QC REVIEW MODULE ---------- */
+function renderQC(p, ch) {
+  const pending = ch.shop.filter(s => s.qcStatus === 'Pending QC');
+  const approved = ch.shop.filter(s => s.qcStatus === 'QC Approved');
+  const rejected = ch.shop.filter(s => s.qcStatus === 'Rejected');
+
+  $('#tabBody').innerHTML = `
+    <div class="cards" style="margin-bottom:14px">
+      <div class="card" style="border-left:4px solid #7c3aed">
+        <h3>Pending QC Inspection</h3>
+        <div style="font-size:24px;font-weight:bold;color:#7c3aed">${pending.length}</div>
+        <p class="hint">Drawings awaiting technical checklist review.</p>
+      </div>
+      <div class="card" style="border-left:4px solid #16a34a">
+        <h3>QC Approved</h3>
+        <div style="font-size:24px;font-weight:bold;color:#16a34a">${approved.length}</div>
+        <p class="hint">Verified against AWI quality standards.</p>
+      </div>
+      <div class="card" style="border-left:4px solid #dc2626">
+        <h3>Rejected / In Revision</h3>
+        <div style="font-size:24px;font-weight:bold;color:#dc2626">${rejected.length}</div>
+        <p class="hint">Returned to Engineering drafters with redlines.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="grid">
+        <thead>
+          <tr>
+            <th>Drawing Number</th>
+            <th>Name</th>
+            <th>Version Set</th>
+            <th>Slide Count</th>
+            <th>QC Status</th>
+            <th>Uploaded By</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${ch.shop.map(d => `
+            <tr>
+              <td><b><a href="#/project/${p.no}/shop/${d.id}">${d.number}</a></b></td>
+              <td>${esc(d.name)}</td>
+              <td>${esc(d.versions[d.current].name)}</td>
+              <td><span class="sigma">Σ${d.versions[d.current].pages}</span></td>
+              <td><span class="badge ${d.qcStatus === 'QC Approved' ? 'b-green' : d.qcStatus === 'Rejected' ? 'b-red' : 'b-purple'}">${d.qcStatus}</span></td>
+              <td>${esc(d.versions[d.current].by)}</td>
+              <td>
+                ${canQC() ? `<button class="btn small primary" onclick="openQCInspectionModal('${p.no}','${d.id}')">Conduct QC Review</button>` : `<a href="#/project/${p.no}/shop/${d.id}">View Drawing</a>`}
+              </td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function openQCInspectionModal(no, drawingId) {
+  const d = state.children[no].shop.find(s => s.id === drawingId);
+  openModal(
+    `QC Review Inspection: ${d.number} - ${d.name}`,
+    `<div>
+      <p><b>Version:</b> ${esc(d.versions[d.current].name)} | <b>Slides:</b> ${d.versions[d.current].pages}</p>
+      <h4 style="margin:12px 0 6px">AWI Architectural Millwork QC Checklist</h4>
+      ${QC_CHECKLIST.map((item, idx) => `
+        <label class="check">
+          <input type="checkbox" class="qccb" id="qc_${idx}">
+          <span>${item}</span>
+        </label>`).join('')}
+      <label style="display:block;margin-top:12px;font-weight:bold">QC Inspection Notes / Redline Summary</label>
+      <textarea id="qcNotes" rows="2" style="width:100%;border:1px solid var(--border);border-radius:4px" placeholder="e.g. Dimensions verified; veneer matching approved."></textarea>
+    </div>`,
+    `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+     <button class="btn red" onclick="submitQCResult('${no}','${drawingId}','Rejected')">Reject &amp; Return to Drafter</button>
+     <button class="btn green" onclick="submitQCResult('${no}','${drawingId}','QC Approved')">Approve Drawing</button>`,
+    true
+  );
+}
+
+function submitQCResult(no, drawingId, status) {
+  const d = state.children[no].shop.find(s => s.id === drawingId);
+  d.qcStatus = status;
+  const notes = $('#qcNotes').value;
+  log(no, `QC ${status} for Shop Drawing ${d.number}${notes ? ': ' + notes : ''}`);
+  save();
+  closeModal();
+  toast(`Shop Drawing ${d.number} marked as ${status}`);
+  renderProject(no, 'qc');
+}
+
+/* ---------- SUBMITTALS WORKFLOW ---------- */
+function renderSubmittals(p, ch) {
+  const list = isClient() ? ch.submittals.filter(s => s.status !== 'Draft') : ch.submittals;
+
+  $('#tabBody').innerHTML = `
+    <div class="actions">
+      ${canManage() ? `<button class="btn orange" onclick="openCreateSubmittal('${p.no}')">+ New Submittal Package</button>` : ''}
+      <span class="spacer"></span>
+      <span class="hint">Architectural Woodwork Institute (AWI) Submittal Transmittal Tracker</span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="grid">
+        <thead>
+          <tr>
+            <th>Submittal No.</th>
+            <th>Title</th>
+            <th>Spec Section</th>
+            <th>Rev</th>
+            <th>Status</th>
+            <th>Ball-in-Court</th>
+            <th>Attached Drawings</th>
+            <th>Date Sent</th>
+            <th>Due Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${list.map(s => `
+            <tr>
+              <td><b>${s.no}</b></td>
+              <td>${esc(s.title)}</td>
+              <td>${esc(s.spec)}</td>
+              <td>Rev ${s.rev}</td>
+              <td><span class="badge ${s.status === 'Approved' ? 'b-green' : s.status === 'Submitted' ? 'b-amber' : 'b-gray'}">${s.status}</span></td>
+              <td><b>${s.ball}</b></td>
+              <td>${s.drawings.length} Shop Dwgs</td>
+              <td>${fmtDate(s.sent)}</td>
+              <td>${fmtDate(s.due)}</td>
+              <td>
+                ${isClient() && s.status === 'Submitted' ? `
+                  <button class="btn green small" onclick="clientSignSubmittal('${p.no}','${s.id}','Approved')">Approve</button>
+                  <button class="btn red small" onclick="clientSignSubmittal('${p.no}','${s.id}','Revise & Resubmit')">Revise</button>
+                ` : `
+                  <button class="btn ghost small" onclick="viewSubmittalDetail('${p.no}','${s.id}')">View Details</button>
+                `}
+              </td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function openCreateSubmittal(no) {
+  const approvedShop = state.children[no].shop.filter(s => s.qcStatus === 'QC Approved');
+  openModal(
+    'Create Submittal Package',
+    `<div class="form">
+      <label>Submittal Title</label>
+      <input id="subTitle" placeholder="e.g. Wall Panels & Mockup Shop Drawings">
+      <label>Spec Section</label>
+      <input id="subSpec" value="06 41 00 Architectural Wood Casework">
+      <label>Select QC-Approved Shop Drawings to Attach</label>
+      ${approvedShop.length === 0 ? '<p class="hint">No QC-Approved shop drawings available. Approve drawings in QC Review tab first.</p>' : `
+        <div style="max-height:140px;overflow:auto;border:1px solid var(--border);padding:6px">
+          ${approvedShop.map(d => `<label class="check"><input type="checkbox" class="subDwgCb" value="${d.id}"> <span><b>${d.number}</b> - ${esc(d.name)}</span></label>`).join('')}
+        </div>
+      `}
+      <div class="row">
+        <div>
+          <label>Issue Date</label>
+          <input type="date" id="subSent" value="${todayIso()}">
+        </div>
+        <div>
+          <label>Contractual Response Due Date</label>
+          <input type="date" id="subDue" value="${isoAdd(todayIso(), 14)}">
+        </div>
+      </div>
+    </div>`,
+    `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+     <button class="btn primary" onclick="submitCreateSubmittal('${no}')">Generate Transmittal &amp; Send</button>`
+  );
+}
+
+function submitCreateSubmittal(no) {
+  const title = $('#subTitle').value.trim();
+  if (!title) return toast('Title is required.');
+  const dwgIds = Array.from(document.querySelectorAll('.subDwgCb:checked')).map(cb => cb.value);
+
+  const sub = {
+    id: uid(),
+    no: `SUB-00${state.children[no].submittals.length + 1}`,
+    title: title,
+    spec: $('#subSpec').value,
+    rev: 0,
+    status: 'Submitted',
+    ball: 'Client / Architect',
+    drawings: dwgIds,
+    sent: $('#subSent').value,
+    due: $('#subDue').value,
+    history: [{ t: nowStr(), user: me().name, text: 'Submitted package to Architect' }]
+  };
+
+  state.children[no].submittals.unshift(sub);
+  log(no, `Created and issued ${sub.no}: ${title}`);
+  save();
+  closeModal();
+  toast(`${sub.no} issued to Client Portal`);
+  renderProject(no, 'submittals');
+}
+
+function clientSignSubmittal(no, subId, decision) {
+  const sub = state.children[no].submittals.find(s => s.id === subId);
+  sub.status = decision === 'Approved' ? 'Approved' : 'Revise & Resubmit';
+  sub.ball = decision === 'Approved' ? '—' : 'Engineering';
+  sub.history.unshift({ t: nowStr(), user: me().name + ' (Client)', text: decision });
+  log(no, `Client marked ${sub.no} as ${decision}`);
+  save();
+  toast(`Submittal ${decision}`);
+  renderProject(no, 'submittals');
+}
+
+function viewSubmittalDetail(no, subId) {
+  const sub = state.children[no].submittals.find(s => s.id === subId);
+  openModal(
+    `${sub.no} — ${sub.title}`,
+    `<div>
+      <p><b>Spec Section:</b> ${esc(sub.spec)} | <b>Status:</b> ${sub.status} | <b>Ball-in-Court:</b> ${sub.ball}</p>
+      <p><b>Sent:</b> ${fmtDate(sub.sent)} | <b>Due:</b> ${fmtDate(sub.due)}</p>
+      <h4 style="margin:12px 0 6px">Audit Log</h4>
+      <div style="font-size:12px;background:#f8fafc;padding:8px;border:1px solid #e2e8f0;border-radius:4px">
+        ${sub.history.map(h => `<div>${h.t} — <b>${esc(h.user)}</b>: ${esc(h.text)}</div>`).join('')}
+      </div>
+    </div>`,
+    '<button class="btn ghost" onclick="closeModal()">Close</button>'
+  );
+}
+
+
+
+// Auto-navigate to Project P-26-1132 on initial load so user lands directly in Full Project View!
+window.addEventListener('load', () => {
+  setAppTheme('cyber');
+
+  if (!location.hash || location.hash === '#/projects/grid') {
+    location.hash = '#/project/P-26-1132/shop';
+  }
+});
+</script>
+</body>
+</html>

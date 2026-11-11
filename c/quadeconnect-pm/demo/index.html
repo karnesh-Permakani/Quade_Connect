@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyber">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuadeConnect — Architectural Millwork ERP</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body data-theme="cyber">
+
+<!-- Master Navigation Bar -->
+<header class="topbar">
+  <div class="brand" onclick="location.hash='#/projects/grid'">
+    <span class="logo">Q</span>
+    <span>Quade<b>Connect</b></span>
+    <span class="module">Neon Cyan Edition</span>
+  </div>
+
+  <nav class="topnav">
+    <a href="#/projects/grid" id="nav-projects">Projects Master Grid</a>
+    <a href="#/projects/kanban">Kanban Board</a>
+    <a href="#/projects/gantt">Gantt Timeline</a>
+  </nav>
+
+  <div class="top-right">
+    <input id="globalSearch" class="global-search" placeholder="Search Proj No, Name, Customer...">
+    
+    <!-- Theme Switcher Controls -->
+    <div class="theme-switch-group" title="Active Theme: Neon Cyan Cyberpunk">
+      <button class="theme-switch-btn active" id="btn-theme-cyber" onclick="setAppTheme('cyber')">⚡ Neon Cyan</button>
+      <button class="theme-switch-btn" id="btn-theme-amber" onclick="setAppTheme('amber')">🔥 Amber</button>
+      <button class="theme-switch-btn" id="btn-theme-emerald" onclick="setAppTheme('emerald')">🧪 Emerald</button>
+      <button class="theme-switch-btn" id="btn-theme-light" onclick="setAppTheme('light')">☀️ Light</button>
+    </div>
+
+    <!-- Role-Based Cost Masking Simulator -->
+    <label class="role-label" title="Switch user role to test cost masking and project scoping">
+      <span>Role:</span>
+      <select id="roleSelect"></select>
+    </label>
+
+    <button class="btn ghost small" onclick="resetDemo()" title="Reset demo data to default">Reset</button>
+  </div>
+</header>
+
+<!-- Quick Project Switcher Subbar -->
+<div class="inn-subbar">
+  <div class="inn-quicklinks">
+    <span style="font-size:11px;font-weight:700;color:#00f5ff;text-transform:uppercase;text-shadow:0 0 8px rgba(0,245,255,0.4)">Quick Jump:</span>
+    <button class="inn-btn-project active" onclick="location.hash='#/project/P-26-1132/shop'">
+      <span>🏢</span> P-26-1132 AUS Project Oasis (52 Shop Drawings)
+    </button>
+    <button class="inn-btn-project" onclick="location.hash='#/project/P-26-1137/sheets'">
+      <span>🏛️</span> P-26-1137 BWI Project Oasis (216 Sheets)
+    </button>
+    <button class="inn-btn-project" onclick="location.hash='#/project/P-26-1132/workorders'">
+      <span>🔨</span> 199 Work Orders
+    </button>
+    <button class="inn-btn-project" onclick="location.hash='#/project/P-26-1132/qc'">
+      <span>🔍</span> QC Review Queue
+    </button>
+    <button class="inn-btn-project" onclick="location.hash='#/project/P-26-1132/submittals'">
+      <span>📋</span> Submittals Transmittals
+    </button>
+  </div>
+  <div style="font-size:11.5px;color:#7dd3fc;font-weight:600">
+    Domain: Innergy Architectural Millwork + ClickUp High-Density UX
+  </div>
+</div>
+
+<!-- Main Dynamic Content Canvas -->
+<main id="view"></main>
+
+<!-- Modals & Notifications Container -->
+<div id="modal"></div>
+<div id="toast"></div>
+
+<!-- Core Engine Scripts -->
+<script>
+const AVAILABLE_THEMES = ['cyber', 'amber', 'emerald', 'light'];
+
+function setAppTheme(themeName) {
+  if (!AVAILABLE_THEMES.includes(themeName)) themeName = 'cyber';
+  document.documentElement.setAttribute('data-theme', themeName);
+  document.body.setAttribute('data-theme', themeName);
+  localStorage.setItem('quadeconnect_theme', themeName);
+  
+  AVAILABLE_THEMES.forEach(t => {
+    const btn = document.getElementById('btn-theme-' + t);
+    if (btn) {
+      if (t === themeName) btn.classList.add('active');
+      else btn.classList.remove('active');
+    }
+  });
+
+  if (typeof toast === 'function') {
+    toast('Switched to ' + themeName.toUpperCase() + ' Theme');
+  }
+}
+
+// Default to Neon Cyan
+setAppTheme('cyber');
+</script>
+<script src="data.js"></script>
+<script src="views.js"></script>
+<script src="project.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
